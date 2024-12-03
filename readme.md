@@ -54,10 +54,10 @@
   ```
 - Added necessary dependencies
   ```bash
-  npm i express;
-  npm i mongoose;
-  npm i cors;
-  npm i nodemon;
+  npm i express
+  npm i mongoose
+  npm i cors
+  npm i nodemon
   ```
 - **Created Backend Structure:**
 
