@@ -89,3 +89,14 @@
 - Created a new file called `app.js` which sends the response to the client.
 
 - Implemented basic error handling in `errorhandler.js` file
+
+## Project Milestone 4
+
+- Created a **User Model** using Mongoose to interact with the database
+
+- Created **Middlewares**  and added a `multer.js` file to it 
+
+- Created a **User Controller** to handle user related operations
+
+- Created a **User Route** to handle user related requests
+
