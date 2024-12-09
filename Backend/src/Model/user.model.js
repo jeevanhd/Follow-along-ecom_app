@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
       { city: String },
       { country: String },
       { address1: String },
-      { add2: String },
+      { address2: String },
       { zipCode: String },
       { addressType: String },
     ],

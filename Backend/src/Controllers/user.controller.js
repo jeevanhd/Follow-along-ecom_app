@@ -1,4 +1,4 @@
-const UserModel = require("../Model/user.model");
+const UserModel = require("../Model/user.model.js");
 
 export async function CreateUser(req, res) {
   const { Name, email, password } = req.body;
@@ -10,11 +10,14 @@ export async function CreateUser(req, res) {
   if (CheckUserPresent) {
     return res.send("user Already exist");
   }
+
   const newUser = new UserModel({
     Name: Name,
     email: email,
     password: password,
   });
-  await newUser.save;
+
+  await newUser.save();
+
   return res.send("user Created Successfully");
 }

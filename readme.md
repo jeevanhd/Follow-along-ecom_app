@@ -73,7 +73,7 @@
   And also created a main file:
 
   ```bash
-  index.js
+  touch index.js
   ```
 
 ## Project Milestone 3
