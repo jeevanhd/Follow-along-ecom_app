@@ -19,17 +19,23 @@
 ### Frontend Setup
 
 - Created a react app
+
   ```bash
   npm create vite@latest Frontend
   ```
+
 - Installed Node Dependencies
+
   ```bash
   npm i
   ```
+
   **or**
+
   ```bash
   npm install
   ```
+
 - **Added Tailwind CSS for styling:**
 
   using the following commands
@@ -52,16 +58,20 @@
 ### Backend Setup
 
 - Initialized Backend Project
+
   ```bash
   npm init -y
   ```
+
 - Added necessary dependencies
+
   ```bash
   npm i express
   npm i mongoose
   npm i cors
   npm i nodemon
   ```
+
 - **Created Backend Structure:**
 
   Set up directories inside the **src** folder:
@@ -92,11 +102,74 @@
 
 ## Project Milestone 4
 
-- Created a **User Model** using Mongoose to interact with the database
+- **Creating the User Model**
 
-- Created **Middlewares**  and added a `multer.js` file to it 
+  1. Created a `models` folder and added a `User.model.js` file.
 
-- Created a **User Controller** to handle user related operations
+  2. Defined the User Schema in `User.js`
 
-- Created a **User Route** to handle user related requests
+- **Adding Middlewares**
 
+  1. Installed multer for file handling
+
+     ```bash
+     npm install multer
+     ```
+
+  2. Created a `middlewares` folder and added a `multer.js` file.
+
+  3. Configured Multer in `middlewares/multer.js`
+
+- **Creating the User Controller**
+
+  1. Created a `controllers` folder and added a `userController.js` file.
+
+  2. Wrote functions to handle user operations like creating, reading, and updating user data:
+
+- **Setting Up User Routes**
+
+  1. Created a `routes` folder and added a `userRoute.js file`.
+
+  2. Defined routes to handle user-related requests
+
+## Project Milestone 5
+
+- **Creating the Sign-up Page**
+
+  1. Created a new `Signup.js` file in the `src` folder.
+
+  2. Added a form with fields for:
+
+     - Name
+     - Email
+     - Password
+     - File Upload
+
+  3. Set up `useState` to manage form data and handled form submission.
+
+- **Adding Form Validation**
+
+  1. Created a `validation.js` file in the `src` folder.
+
+  2. Added functions to validate fields, e.g., checking if fields are empty or if the email format is correct.
+
+  3. Used the validation functions in the `Signup.js` file to show error messages when users submit invalid data.
+
+- **Setting Up Routing**
+
+  1. Updated `src/index.js` to use `BrowserRouter`:
+
+     ```jsx
+     <BrowserRouter>
+       <App />
+     </BrowserRouter>
+     ```
+
+  2. Added `/signup` and `/login` routes in `App.js`
+
+     ```jsx
+     <Routes>
+       <Route path="/signup" element={<Signup />} />
+       <Route path="/login" element={<Login />} />
+     </Routes>
+     ```
