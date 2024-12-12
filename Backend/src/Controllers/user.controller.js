@@ -1,6 +1,7 @@
 const UserModel = require("../Model/user.model.js");
+const ErrorHandler = require("../utilities/errorhandler.js");
 
-export async function CreateUser(req, res) {
+async function CreateUser(req, res) {
   const { Name, email, password } = req.body;
 
   const CheckUserPresent = await UserModel.findOne({
@@ -8,7 +9,7 @@ export async function CreateUser(req, res) {
   });
 
   if (CheckUserPresent) {
-    return res.send("user Already exist");
+    return new ErrorHandler("user Already exist", 400);
   }
 
   const newUser = new UserModel({
@@ -21,3 +22,5 @@ export async function CreateUser(req, res) {
 
   return res.send("user Created Successfully");
 }
+
+module.exports = CreateUser;
