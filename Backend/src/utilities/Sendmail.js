@@ -1,0 +1,9 @@
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.ethereal.email",
+  auth: {
+    user: "jeevanhd1313@gmail.com",
+    pass: "qosr crfk zfos kufr",
+  },
+});
