@@ -7,3 +7,5 @@ const transporter = nodemailer.createTransport({
     pass: "qosr crfk zfos kufr",
   },
 });
+
+module.exports = transporter;

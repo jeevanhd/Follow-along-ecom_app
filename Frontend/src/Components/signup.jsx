@@ -20,6 +20,7 @@ const SignupForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     const Namev = validation.validateName(data.name);
     const Emailv = validation.validateEmail(data.email);
     const Passv = validation.validatePassword(data.password);
@@ -107,7 +108,7 @@ const SignupForm = () => {
               hover:file:bg-blue-100"
           />
         </div>
-
+        <p className="text-red">{error}</p>
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"
