@@ -173,3 +173,27 @@
        <Route path="/login" element={<Login />} />
      </Routes>
      ```
+
+## Project Milestone 6
+
+- **JWT Authentication and Email Verification**
+
+  - Installing jsonwebtoken
+
+    ```bash
+    npm install jsonwebtoken
+    ```
+
+- Adding JWT Authentication
+
+  - Generating a JWT Token
+
+  - Protecting Routes with JWT
+
+- Adding Email Verification in userController.js
+
+  - Generating a Verification Token
+
+  - Verifying the Email Token
+
+  - Sending Verification Email After Signup

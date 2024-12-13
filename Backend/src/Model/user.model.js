@@ -1,5 +1,3 @@
-const { version } = require("mongoose");
-
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
@@ -21,8 +19,8 @@ const userSchema = new mongoose.Schema(
     ],
     role: { type: String, default: "user" },
     avatar: {
-      url: { type: String, require: true },
-      public_id: { type: String, require: true },
+      url: { type: String },
+      public_id: { type: String },
     },
     resetPasswordToken: String,
     resetPasswordTime: Date,
