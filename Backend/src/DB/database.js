@@ -1,9 +1,8 @@
 if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({
-    path: "../Config/.env",
+    path: "../config/.env",
   });
 }
-
 
 const mongoose = require("mongoose");
 
@@ -12,12 +11,10 @@ const connectDatabase = () => {
     .connect(process.env.DB_URL)
     .then((data) => {
       console.log(
-        `Connected to database successfully: ${data.connection.host}`
+        `Database is connected Successfully: ${data.connection.host}`
       );
     })
-    .catch((err) => {
-      console.log("Database connection failed", err.message);
-    });
+    .catch((er) => console.log("Database connection Failed...", er.message));
 };
 
 module.exports = connectDatabase;
