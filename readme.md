@@ -197,3 +197,34 @@
   - Verifying the Email Token
 
   - Sending Verification Email After Signup
+
+## Project Milestone 7
+
+- **Created Two Routes: Signup and Login**
+
+  ### For Signup
+
+  - Extracting User Data from the Request Body:
+
+    ```javascript
+    const { name, email, password } = req.body;
+    ```
+
+  - Checking if the User Already Exists in the Database:
+    - **If Yes**: Return a message indicating the user is already present and suggest direct login.
+    - **If No**:
+      - Hash the password using libraries like `bcrypt.js` or `argon2.js`.
+      - Create a new user and store their `name`, `email`, and hashed `password` in the database.
+
+  ### For Login
+
+  - Extracting User Data from the Request Body:
+
+    ```javascript
+    const { email, password } = req.body;
+    ```
+
+  - Validating User Credentials:
+    - **If User Exists and Password Matches**:
+      - Generate a token and send it back as cookies.
+    - **If Not**: Return a message prompting the user to sign up first.
