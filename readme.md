@@ -228,3 +228,30 @@
     - **If User Exists and Password Matches**:
       - Generate a token and send it back as cookies.
     - **If Not**: Return a message prompting the user to sign up first.
+
+## Project Milestone 10
+
+- **Product Schema and Endpoints**
+
+  ### Product Schema
+
+  - Define a schema for products including necessary fields such as name, description, price, and image URLs.
+
+  ### Creating Endpoint to Write Data into the Database
+
+  - Implement an API route to handle requests for adding new product data into the database.
+
+    ```javascript
+    app.post("/add-product", (req, res) => {
+      const { name, description, price, imageUrl } = req.body;
+      // Logic to store the product in the database
+    });
+    ```
+
+  ### Integrating Cloudinary and Multer
+
+  - **Cloudinary**:
+    - Use Cloudinary to store product images and retrieve their URLs.
+  - **Multer**:
+    - Use Multer for handling file uploads in the API.
+    - Configure Multer middleware to upload images before saving product data.

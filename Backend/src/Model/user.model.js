@@ -8,7 +8,10 @@ const userSchema = new mongoose.Schema(
       require: [true, "Please Enter Email.. "],
       unique: [true, "Please enter Unique Email Address"],
     },
-    password: { type: String, require: [true, "Please enter the password..."] },
+    password: {
+      type: String,
+      require: [true, "Please enter the password..."],
+    },
     address: [
       { city: String },
       { country: String },
@@ -22,7 +25,7 @@ const userSchema = new mongoose.Schema(
       url: { type: String, require: true },
       public_id: { type: String, require: true },
     },
-    resetPaswordToken: String,
+    resetPasswordToken: String,
     resetPasswordTime: Date,
   },
   { versionKey: false }
