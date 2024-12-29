@@ -1,7 +1,7 @@
 const UserModel = require("../models/user.model.js");
 const ErrorHandler = require("../utils/ErrorHandler.js");
 const transporter = require("../utils/sendmail.js");
-const jwt = require("jsonwebtoken"); //tokenisation of user data (every communication that happend between server(beknd) and client(ft))
+const jwt = require("jsonwebtoken"); //tokenization of user data (every communication that happend between server(beknd) and client(ft))
 const bcrypt = require("bcrypt"); //hashes the password only
 
 require("dotenv").config({
@@ -41,8 +41,8 @@ async function CreateUSer(req, res) {
   };
   const token = generateToken(data);
   await transporter.sendMail({
-    to: "naayaankumar@gmail.com",
-    from: "naayaankumar@gmail.com",
+    to: "jeevanhd1313@gmail.com",
+    from: "jeevanhd1313@gmail.com",
     subject: "verification email from follow along project",
     text: "Text",
     html: `<h1>Hello world   http://localhost:5173/activation/${token} </h1>`,
@@ -54,7 +54,7 @@ async function CreateUSer(req, res) {
 }
 
 // 1. Check if there is any user already present with same creds
-// 2. if yes/true send respinse as user already exists
+// 2. if yes/true send response as user already exists
 // 3. if no /false cerate a user in database
 
 const generateToken = (data) => {

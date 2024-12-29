@@ -39,14 +39,14 @@ const createProductController = async (req, res) => {
     });
     return res.status(201).send({
       message: "Image Successfully Uploaded",
-      sucess: true,
+      success: true,
       dataImages,
       StoreProductDetails,
     });
   } catch (er) {
     if (er instanceof multer.MulterError) {
       return res.status(400).send({
-        message: "Multer error plese send image less than 5 ",
+        message: "Multer error please send image less than 5 ",
         success: false,
       });
     }
