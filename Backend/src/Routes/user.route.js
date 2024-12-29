@@ -5,7 +5,7 @@ const {
   verifyUserController,
   signup,
   login,
-} = require("../controllers/user.controller.js");
+} = require("../Controllers/user.controller.js");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 
