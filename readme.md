@@ -229,6 +229,35 @@
       - Generate a token and send it back as cookies.
     - **If Not**: Return a message prompting the user to sign up first.
 
+## Project Milestone 8
+
+**Frontend Updates:**
+
+- **Card Component:**
+  - Added a reusable Card component for displaying product details.
+- **Responsive Homepage Layout:**
+  - Implemented a responsive layout using `flexbox`.
+  - Mapped dummy product data to the Card component in `Home.jsx` for dynamic rendering.
+
+---
+
+## Project Milestone 9
+
+**Product Management:**
+
+- **Product Form:**
+  - Created a form with the following fields:
+    - Product Title
+    - Description
+    - Stock
+    - Price
+    - Discounted Price
+    - Category
+    - Rating
+  - Enabled form submission for product data entry.
+
+---
+
 ## Project Milestone 10
 
 - **Product Schema and Endpoints**
