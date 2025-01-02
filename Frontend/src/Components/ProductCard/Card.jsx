@@ -1,4 +1,4 @@
-function Card({ title, Index }) {
+export default function Card({ title, Index }) {
   return (
     <div className="w-72 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       {/* Image Container */}
@@ -49,4 +49,4 @@ function Card({ title, Index }) {
   );
 }
 
-export default Card;
+

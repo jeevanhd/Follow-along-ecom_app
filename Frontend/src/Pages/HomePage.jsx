@@ -1,16 +1,17 @@
 import { useState } from "react";
-import Card from "../component/ProductCard/Card";
+import Card from "../Components/ProductCard/Card.jsx";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [data, setdata] = useState(
-    new Array(20).fill({ title: "Product Title" })
+    new Array(2).fill({ title: "Product Title" })
   );
 
   console.log(data);
 
   return (
     <div>
-      <h1 className="text-center">'Home Page fro Follow along'</h1>
+      <h1 className="text-center">'Home Page fror Follow along'</h1>
 
       <div className="grid grid-cols-3">
         {data.map((ele, index) => {
@@ -20,6 +21,16 @@ function HomePage() {
             </div>
           );
         })}
+      </div>
+
+      <div>
+        <Link to={"/login"} className="text-blue-500">
+          login
+        </Link> 
+        { " " }
+        <Link to={"/signup"} className="text-blue-500">
+          signup
+        </Link>
       </div>
     </div>
   );

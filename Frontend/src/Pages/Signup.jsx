@@ -1,5 +1,7 @@
-import SignupForm from "../component/auth/Signup";
+import SignupForm from "../Components/auth/signup.jsx";
 
-export default function Signup() {
+function Signup() {
   return <SignupForm />;
 }
+
+export default Signup;
