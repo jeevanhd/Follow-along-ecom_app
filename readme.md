@@ -86,6 +86,8 @@
   touch index.js
   ```
 
+---
+
 ## Project Milestone 3
 
 ### Connecting Backend and Database
@@ -99,6 +101,8 @@
 - Created a new file called `app.js` which sends the response to the client.
 
 - Implemented basic error handling in `errorhandler.js` file
+
+---
 
 ## Project Milestone 4
 
@@ -131,6 +135,8 @@
   1. Created a `routes` folder and added a `userRoute.js file`.
 
   2. Defined routes to handle user-related requests
+
+---
 
 ## Project Milestone 5
 
@@ -174,6 +180,8 @@
      </Routes>
      ```
 
+---
+
 ## Project Milestone 6
 
 - **JWT Authentication and Email Verification**
@@ -197,6 +205,8 @@
   - Verifying the Email Token
 
   - Sending Verification Email After Signup
+
+---
 
 ## Project Milestone 7
 
@@ -228,6 +238,8 @@
     - **If User Exists and Password Matches**:
       - Generate a token and send it back as cookies.
     - **If Not**: Return a message prompting the user to sign up first.
+
+---
 
 ## Project Milestone 8
 
