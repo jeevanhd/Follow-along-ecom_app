@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import validation from "../Validation.js";
+import Validate_obj from "../../Validation.js";
 
 const SignupForm = () => {
   const [data, setData] = useState({
@@ -20,10 +20,10 @@ const SignupForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    const Namev = validation.validateName(data.name);
-    const Emailv = validation.validateEmail(data.email);
-    const Passv = validation.validatePassword(data.password);
+
+    const Namev = Validate_obj.validateName(data.name);
+    const Emailv = Validate_obj.validateEmail(data.email);
+    const Passv = Validate_obj.validatePassword(data.password);
 
     if (typeof Namev == "string" && Namev.length > 1) {
       return setError(Namev);
