@@ -350,3 +350,27 @@
     const productRoutes = require("./routes/product.router");
     app.use("/api/products", productRoutes);
     ```
+
+## Project Milestone 12
+
+### Implement Product Routes
+
+1. **Create Product Router:**
+   - Create a new file `product.router.js` in the `routes` directory.
+   - Define routes for handling product-related requests (e.g., fetching product list, product details).
+
+2. **Integrate Product Routes:**
+   - Import the `productRoutes` in your main server file.
+   - Use the `productRoutes` with the `/api/products` endpoint.
+
+3. **Test Product Routes:**
+   - Ensure that the product routes are working correctly by making requests to the endpoints.
+   - Verify that the responses are as expected.
+
+4. **Update Documentation:**
+   - Document the new product routes in the README file.
+   - Include examples of how to use the endpoints.
+
+5. **Deploy and Verify:**
+   - Deploy the updated application to your development/staging environment.
+   - Verify that the product routes are functioning correctly in the deployed environment.
