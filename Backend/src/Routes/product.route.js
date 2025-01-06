@@ -4,13 +4,16 @@ const express = require("express");
 
 const {
   createProductController,
+  getProductDataController,
 } = require("../Controllers/product.controller.js");
 const router = express.Router();
 
 router.post(
   "./create-product",
-  upload.array("files", 5),
+  upload.array("files", 3),
   createProductController
 );
+
+router.get("/get-products", getProductDataController);
 
 module.exports = router;

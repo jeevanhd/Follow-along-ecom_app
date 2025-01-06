@@ -1,7 +1,8 @@
 const multer = require("multer");
-const cloudinary = require("../utils/cloudinary.js");
+const cloudinary = require("../utilities/cloudinary.js");
 const fs = require("fs");
-const ProductModel = require("../models/Product.model.js");
+const ProductModel = require("../Model/Product.model.js");
+
 
 const createProductController = async (req, res) => {
   const {
@@ -55,4 +56,15 @@ const createProductController = async (req, res) => {
   }
 };
 
-module.exports = { createProductController };
+const getProductDataController = async (req, res) => {
+  try {
+    const data = await ProductModel.find();
+    return res
+      .status(200)
+      .send({ data, message: "Data fetched successfully", success: true });
+  } catch (er) {
+    return res.status(500).send({ message: er.message, success: false });
+  }
+};
+
+module.exports = { createProductController, getProductDataController };
