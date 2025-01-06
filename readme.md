@@ -274,8 +274,6 @@
 
 - **Product Schema and Endpoints**
 
-  ### Product Schema
-
   - Define a schema for products including necessary fields such as name, description, price, and image URLs.
 
   ### Creating Endpoint to Write Data into the Database
@@ -296,3 +294,59 @@
   - **Multer**:
     - Use Multer for handling file uploads in the API.
     - Configure Multer middleware to upload images before saving product data.
+
+## Project Milestone 11
+
+- **Product Schema and Endpoints**
+
+  - Define a schema for products, including necessary fields such as `title`, `description`, `rating`, `discountedPrice`, `originalPrice`, `quantity`, `category`, and `images`.
+
+  ### Creating Endpoint to Display All Products
+
+  - Created a new API endpoint to retrieve and display all the products from the database.
+
+    ```javascript
+    // product.router.js
+    router.get("/get-products", async (req, res) => {
+      try {
+        const products = await ProductModel.find({});
+        res.status(200).send({
+          success: true,
+          message: "Products retrieved successfully",
+          data: products,
+        });
+      } catch (error) {
+        res.status(500).send({
+          success: false,
+          message: "Error retrieving products",
+          error: error.message,
+        });
+      }
+    });
+    ```
+
+  ### Integrating the New Route
+
+  - Added the `/get-products` route in `product.router.js` to handle the retrieval of all product data. This route queries the database and returns a list of products.
+
+    ```javascript
+    const express = require("express");
+    const router = express.Router();
+    const ProductModel = require("./models/ProductModel");
+
+    // Endpoint to fetch all products
+    router.get("/get-products", async (req, res) => {
+      // Logic to fetch products
+    });
+
+    module.exports = router;
+    ```
+
+  ### Integration with Server
+
+  - Ensure the `product.router.js` file is properly imported and used in the main server file:
+
+    ```javascript
+    const productRoutes = require("./routes/product.router");
+    app.use("/api/products", productRoutes);
+    ```
