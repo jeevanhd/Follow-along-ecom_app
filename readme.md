@@ -356,18 +356,22 @@
 ### Implement Product Routes
 
 1. **Create Product Router:**
+
    - Create a new file `product.router.js` in the `routes` directory.
    - Define routes for handling product-related requests (e.g., fetching product list, product details).
 
 2. **Integrate Product Routes:**
+
    - Import the `productRoutes` in your main server file.
    - Use the `productRoutes` with the `/api/products` endpoint.
 
 3. **Test Product Routes:**
+
    - Ensure that the product routes are working correctly by making requests to the endpoints.
    - Verify that the responses are as expected.
 
 4. **Update Documentation:**
+
    - Document the new product routes in the README file.
    - Include examples of how to use the endpoints.
 
