@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Card from "../Components/ProductCard/Card.jsx";
 
 function HomePage() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
 
   const fetchedProducts = async () => {
     const response = await axios.get(

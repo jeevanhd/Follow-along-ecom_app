@@ -8,7 +8,7 @@ require("dotenv").config({
   path: "../config/.env",
 });
 
-async function CreateUSer(req, res) {
+async function CreateUser(req, res) {
   const { Name, email, password } = req.body;
 
   const CheckUserPresent = await UserModel.findOne({
@@ -30,10 +30,7 @@ async function CreateUSer(req, res) {
     email: email,
     password: password,
   });
-  // send mail
-  // 1. Link (http://localhost:5173/activation/{token})
-  // 2. send the above link as mail
-  // 3. direct the user to activation page
+
   const data = {
     Name,
     email,
@@ -53,12 +50,7 @@ async function CreateUSer(req, res) {
   return res.send("User Created Successfully");
 }
 
-// 1. Check if there is any user already present with same creds
-// 2. if yes/true send response as user already exists
-// 3. if no /false cerate a user in database
-
 const generateToken = (data) => {
-  // jwt
   const token = jwt.sign(
     { name: data.name, email: data.email },
     process.env.SECRET_KEY
@@ -92,8 +84,8 @@ async function verifyUserController(req, res) {
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    const checkUserPresentinDB = await UserModel.findOne({ email: email });
-    if (checkUserPresentinDB) {
+    const checkUserPresentInDB = await UserModel.findOne({ email: email });
+    if (checkUserPresentInDB) {
       return res.status(403).send({ message: "User already present" });
     }
 
@@ -113,8 +105,6 @@ const signup = async (req, res) => {
         return res.status(500).send({ message: er.message });
       }
     });
-
-    //
   } catch (er) {
     return res.status(500).send({ message: er.message });
   }
@@ -122,20 +112,19 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const checkUserPresentinDB = await UserModel.findOne({ email: email });
+    const checkUserPresentInDB = await UserModel.findOne({ email: email });
 
     bcrypt.compare(
       password,
-      checkUserPresentinDB.password,
+      checkUserPresentInDB.password,
       function (err, result) {
-        // result == true
         if (err) {
           return res.status(403).send({ message: er.message, success: false });
         }
         let data = {
-          id: checkUserPresentinDB._id,
+          id: checkUserPresentInDB._id,
           email,
-          password: checkUserPresentinDB.password,
+          password: checkUserPresentInDB.password,
         };
         const token = generateToken(data);
 
@@ -145,11 +134,9 @@ const login = async (req, res) => {
           .send({ message: "User logged in successfully..", success: true });
       }
     );
-
-    // return saying signup first
   } catch (er) {
     return res.status(403).send({ message: er.message, success: false });
   }
 };
 
-module.exports = { CreateUSer, verifyUserController, signup, login };
+module.exports = { CreateUser, verifyUserController, signup, login };
