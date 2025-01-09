@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Card({
   title,
   image,
@@ -6,16 +8,14 @@ function Card({
   originalPrice,
   discountedPrice,
   rating,
+  id,
+  handelDelete,
 }) {
   return (
     <div className="w-72 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       {/* Image Container */}
       <div className="relative">
-        <img
-          alt="Product"
-          src= {image}
-          className="w-full h-48 object-cover"
-        />
+        <img alt="Product" src={image} className="w-full h-48 object-cover" />
         <span className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm font-semibold">
           -20%
         </span>
@@ -40,7 +40,9 @@ function Card({
         {/* Price Section */}
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-xl font-bold text-gray-900">₹ {originalPrice }</span>
+            <span className="text-xl font-bold text-gray-900">
+              ₹ {originalPrice}
+            </span>
             <span className="ml-2 text-sm text-gray-500 line-through">
               ₹ {discountedPrice}
             </span>
@@ -48,7 +50,18 @@ function Card({
           <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200">
             Add to cart
           </button>
+          <Link to={`/update-product/${id}`}>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200">
+              Update
+            </button>
+          </Link>
         </div>
+        <button
+          className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200"
+          onClick={() => handelDelete(id)}
+        >
+          Delete
+        </button>
       </div>
     </div>
   );
