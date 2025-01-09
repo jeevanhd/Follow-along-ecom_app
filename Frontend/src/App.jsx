@@ -4,6 +4,7 @@ import Login from "./Pages/Login";
 import ProductEntryPage from "./Pages/ProductEntryPage";
 import Signup from "./Pages/Signup";
 import UpdateForm from "./Pages/UpdateForm";
+
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/product-entry-page" element={<ProductEntryPage />} />
         <Route path="/update-form/:id" element={<UpdateForm />} />
+
       </Routes>
     </>
   );

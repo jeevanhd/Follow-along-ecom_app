@@ -357,7 +357,6 @@
 
 1. **Create Product Router:**
 
-   - Create a new file `product.router.js` in the `routes` directory.
    - Define routes for handling product-related requests (e.g., fetching product list, product details).
 
 2. **Integrate Product Routes:**
@@ -378,3 +377,50 @@
 5. **Deploy and Verify:**
    - Deploy the updated application to your development/staging environment.
    - Verify that the product routes are functioning correctly in the deployed environment.
+
+## Project Milestone 13
+
+### Implemented Update Option for Existing data
+
+1. **Created an end point for Updating**
+
+   - Defined Route for updating existing data
+
+2. **Implemented Update Logic**
+
+   - Updated the controller logic to handle update requests
+
+3. **Tested Update End Point**
+   - Made requests to the update endpoint to verify functionality
+
+### Implemented FrontEnd to Update Existing Data
+
+1. **Created a Form to Update Existing Data**
+
+   - Created a form to update existing data
+
+2. **Integrated Form with Backend End Point**
+
+   - Integrated the form with the update endpoint
+
+3. **Tested Update Functionality**
+   - Tested the update functionality to ensure it works as expected
+
+## Project Milestone 14
+
+### Implemented Delete Option for Existing Data
+
+1. **Created an end point for Deleting**
+
+   - Defined Route for deleting existing data
+
+2. **Implemented Delete Logic**
+
+   - Updated the controller logic to handle delete requests
+
+3. **Tested Delete End Point**
+
+   - Made requests to the delete endpoint to verify functionality
+
+4. **Updated Frontend Logic to Delete Existing Data**
+   - Updated the frontend logic to include a delete option
