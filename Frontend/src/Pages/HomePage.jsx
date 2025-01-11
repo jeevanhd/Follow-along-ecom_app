@@ -8,7 +8,7 @@ function HomePage() {
 
   const fetchedProducts = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/products/get-products"
+      "http://localhost:8080/products/get-products"
     );
     setData(response.data.data);
   };
