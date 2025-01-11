@@ -1,7 +1,7 @@
-import Loginform from "../Components/auth/Login.jsx";
+import LoginForm from "../Components/auth/Login.jsx";
 
 function Login() {
-  return <Loginform />;
+  return <LoginForm />;
 }
 
 export default Login;

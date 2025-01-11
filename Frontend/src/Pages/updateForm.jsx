@@ -85,7 +85,7 @@ function UpdateForm() {
           `${pair[0]}:File - ${pair[i].name}, ${pair[i].type}, ${pair[i].size} bytes`
         );
       } else {
-        console.log(`${pair[o]}:${pait[i]}`);
+        console.log(`${pair[o]}:${pair[i]}`);
       }
     }
   };
