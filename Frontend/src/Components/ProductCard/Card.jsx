@@ -24,10 +24,7 @@ function Card({
       {/* Content Container */}
       <div className="p-5">
         {/* Title */}
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">
-          {/* Wireless Noise-Canceling Headphones */}
-          {title}
-        </h3>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">{title}</h3>
 
         {/* Description */}
         <p className="text-gray-600 text-sm mb-4">{description}</p>
