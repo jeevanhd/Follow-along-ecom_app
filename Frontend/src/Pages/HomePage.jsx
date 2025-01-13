@@ -8,7 +8,7 @@ function HomePage() {
 
   const fetchedProducts = async () => {
     const response = await axios.get(
-      "http://localhost:8080/products/get-products"
+      `http://localhost:8080/product/get-products`
     );
     setData(response.data.data);
   };
@@ -19,8 +19,6 @@ function HomePage() {
     };
     callHandel();
   }, []);
-
-  console.log(data);
 
   const handelDelete = async (id) => {
     const data = await axios.delete(`http://localhost:8080/product/${id}`);
@@ -37,29 +35,22 @@ function HomePage() {
               style={{ margin: "auto" }}
               className="border border-white"
             >
-              <Card
-                title={ele.title}
-                image={ele.image[0] ? ele.image[0] : "No image :/"}
-                Index={index}
-                description={ele.description}
-                originalPrice={ele.originalPrice}
-                discountedPrice={ele.discountPrice}
-                rating={ele.rating}
-                id={ele._id}
-                handelDelete={handelDelete}
-              />
+              <Link to={`/product-details/${ele._id}`}>
+                <Card
+                  title={ele.title}
+                  image={ele.image ? ele.image : "No image :/"}
+                  Index={index}
+                  description={ele.description}
+                  originalPrice={ele.originalPrice}
+                  discountedPrice={ele.discountPrice}
+                  rating={ele.rating}
+                  id={ele._id}
+                  handelDelete={handelDelete}
+                />
+              </Link>
             </div>
           );
         })}
-      </div>
-
-      <div>
-        <Link to={"/login"} className="text-blue-500">
-          login
-        </Link>{" "}
-        <Link to={"/signup"} className="text-blue-500">
-          signup
-        </Link>
       </div>
     </div>
   );

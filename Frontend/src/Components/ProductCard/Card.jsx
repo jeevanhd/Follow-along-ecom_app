@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 function Card({
   title,
   image,
@@ -47,15 +45,16 @@ function Card({
           <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200">
             Add to cart
           </button>
-          <Link to={`/update-product/${id}`}>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200">
-              Update
-            </button>
-          </Link>
+          <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200">
+            Update
+          </button>
         </div>
         <button
           className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200"
-          onClick={() => handelDelete(id)}
+          onClick={(e) => {
+            e.preventDefault();
+            handelDelete(id);
+          }}
         >
           Delete
         </button>

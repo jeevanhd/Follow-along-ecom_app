@@ -4,6 +4,7 @@ import HomePage from "./Pages/HomePage";
 import Login from "./Pages/Login";
 import ProductEntryPage from "./Pages/ProductEntryPage";
 import Signup from "./Pages/Signup";
+import SinglePageProduct from "./Pages/SingleProductPage";
 import UpdateForm from "./Pages/updateForm";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/product-entry-page" element={<ProductEntryPage />} />
         <Route path="/update-form/:id" element={<UpdateForm />} />
+        <Route path="/product-details/:id" element={<SinglePageProduct />} />
       </Routes>
     </>
   );

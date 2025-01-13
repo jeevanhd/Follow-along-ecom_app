@@ -424,3 +424,29 @@
 
 4. **Updated Frontend Logic to Delete Existing Data**
    - Updated the frontend logic to include a delete option
+
+## Project Milestone 15
+
+### Implemented Navbar for the Application
+
+- Created a navbar for the application
+
+### Implemented Responsive Design for the Application
+
+- Implemented a responsive design for the application
+
+- Ensured the application works well on different screen sizes and devices
+
+## Project Milestone 16
+
+### Implemented singleProduct page
+
+- Created a single product page to display a single product
+
+- Implemented the logic to fetch a single product from the database
+
+### Add quantity to cart functionality
+
+- Implemented the logic to add quantity to cart functionality
+
+- Implemented the logic to update the quantity in the cart
