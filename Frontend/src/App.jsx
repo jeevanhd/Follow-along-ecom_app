@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Navbar from "./Components/Navbar/Navbar";
 import HomePage from "./Pages/HomePage";
 import Login from "./Pages/Login";
 import ProductEntryPage from "./Pages/ProductEntryPage";
@@ -8,6 +9,7 @@ import UpdateForm from "./Pages/updateForm";
 function App() {
   return (
     <>
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<Signup />} />
