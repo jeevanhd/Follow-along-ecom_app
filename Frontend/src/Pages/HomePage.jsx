@@ -29,8 +29,6 @@ function HomePage() {
 
   return (
     <div>
-      <h1 className="text-center">'Home Page for Follow along'</h1>
-
       <div className="grid grid-cols-3">
         {data?.map((ele, index) => {
           return (
