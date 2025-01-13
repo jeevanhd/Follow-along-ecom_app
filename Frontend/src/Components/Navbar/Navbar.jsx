@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +9,14 @@ const Navbar = () => {
 
   return (
     <nav className="bg-blue-600">
+      <div>
+        <Link to={"/login"} className="text-blue-500">
+          login
+        </Link>{" "}
+        <Link to={"/signup"} className="text-blue-500">
+          signup
+        </Link>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Hamburger Menu Button (visible on mobile) */}

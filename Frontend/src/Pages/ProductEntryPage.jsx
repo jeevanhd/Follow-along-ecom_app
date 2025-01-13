@@ -6,7 +6,7 @@ function ProductEntryPage() {
     title: "",
     description: "",
     rating: 0,
-    discount: 0,
+    discountedPrice: 0,
     originalPrice: 0,
     quantity: 0,
     category: "",
@@ -34,7 +34,7 @@ function ProductEntryPage() {
       title,
       description,
       rating,
-      discount,
+      discountedPrice,
       originalPrice,
       quantity,
       category,
@@ -55,7 +55,7 @@ function ProductEntryPage() {
     formDataBody.append("title", title);
     formDataBody.append("description", description);
     formDataBody.append("rating", rating);
-    formDataBody.append("discount", discount);
+    formDataBody.append("discountedPrice", discountedPrice);
     formDataBody.append("originalPrice", originalPrice);
     formDataBody.append("quantity", quantity);
     formDataBody.append("rating", rating);
@@ -65,13 +65,13 @@ function ProductEntryPage() {
     });
 
     axios
-      .post("http://localhost:8080/product/create-product", formData, {
+      .post(`http://localhost:8080/product/create-product`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -112,8 +112,8 @@ function ProductEntryPage() {
           <br />
           <input
             type="number"
-            name="discountedprice"
-            value={formData.discountedprice}
+            name="discountedPrice"
+            value={formData.discountedPrice}
             onChange={HandelChange}
             placeholder="Discounted price"
           />
@@ -124,8 +124,8 @@ function ProductEntryPage() {
           <br />
           <input
             type="number"
-            name="originalprice"
-            value={formData.originalprice}
+            name="originalPrice"
+            value={formData.originalPrice}
             onChange={HandelChange}
             placeholder="Original price"
           />
