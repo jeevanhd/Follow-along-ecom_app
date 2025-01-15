@@ -2,6 +2,7 @@ const multer = require("multer");
 const upload = multer({ dest: "temp-uploads/" });
 const express = require("express");
 const router = express.Router();
+const verifyUser = require("../Middlewares/jwt-verify.js");
 
 const {
   createProductController,
@@ -14,6 +15,7 @@ const {
 router.post(
   "/create-product",
   upload.array("files", 3),
+  verifyUser,
   createProductController
 );
 

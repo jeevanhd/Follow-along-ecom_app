@@ -1,5 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [information, setInformation] = useState({
@@ -14,9 +15,17 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted Information:", information);
+    try {
+      const response = await axios.post("http://localhost:8080/user/login");
+      localStorage.setItem("token", response.data.token);
+      console.log(data);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

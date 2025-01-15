@@ -16,6 +16,7 @@ const SchemaObject = {
         "https://static.vecteezy.com/system/resources/previews/018/922/122/non_2x/3d-gender-symbol-sign-png.png",
     },
   ],
+  userEmail: { type: String },
 };
 
 const ProductSchema = new mongoose.Schema(SchemaObject);
