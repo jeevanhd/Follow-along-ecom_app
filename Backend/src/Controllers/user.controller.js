@@ -1,8 +1,10 @@
 const UserModel = require("../Model/user.model.js");
 const ErrorHandler = require("../utilities/errorhandler.js");
 const transporter = require("../utilities/Sendmail.js");
-const jwt = require("jsonwebtoken"); //tokenization of user data (every communication that happend between server(beknd) and client(ft))
-const bcrypt = require("bcrypt"); //hashes the password only
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const cloudinary = require("cloudinary");
+const fs = require("fs");
 
 require("dotenv").config({
   path: "../config/.env",
@@ -57,6 +59,7 @@ const generateToken = (data) => {
   );
   return token;
 };
+
 const verifyUser = (token) => {
   const verify = jwt.verify(token, process.env.SECRET_KEY);
   if (verify) {
@@ -89,6 +92,13 @@ const signup = async (req, res) => {
       return res.status(403).send({ message: "User already present" });
     }
 
+    const imageAddress = await cloudinary.UploadStream.upload(req.file.path, {
+      folder: "uploads",
+    }).then((res) => {
+      fs.unlinkSync(req.file.path);
+      return res.url;
+    });
+
     bcrypt.hash(password, 10, async function (err, hashedPassword) {
       try {
         if (err) {
@@ -98,6 +108,10 @@ const signup = async (req, res) => {
           Name: name,
           email,
           password: hashedPassword,
+          avatar: {
+            url: imageAddress,
+            public_id: `${email}_public_id`,
+          },
         });
 
         return res.status(201).send({ message: "User created successfully.." });
@@ -109,6 +123,7 @@ const signup = async (req, res) => {
     return res.status(500).send({ message: er.message });
   }
 };
+
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -128,10 +143,11 @@ const login = async (req, res) => {
         };
         const token = generateToken(data);
 
-        return res
-          .status(200)
-          .cookie("token", token)
-          .send({ message: "User logged in successfully..", success: true });
+        return res.status(200).cookie("token", token).send({
+          message: "User logged in successfully..",
+          success: true,
+          token,
+        });
       }
     );
   } catch (er) {

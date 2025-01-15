@@ -1,5 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Validate_obj from "../../Validation.js";
 
 const SignupForm = () => {
@@ -11,14 +12,23 @@ const SignupForm = () => {
   });
   const [error, setError] = useState("");
 
+  const navigator = useNavigate();
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
+    const { name, value, files } = e.target;
+    if (name == "file") {
+      setData({
+        ...data,
+        [name]: files[0],
+      });
+    } else {
+      setData({
+        ...data,
+        [name]: value,
+      });
+    }
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const Namev = Validate_obj.validateName(data.name);
@@ -36,6 +46,22 @@ const SignupForm = () => {
     }
 
     setError("");
+
+    const formDataBody = new FormData();
+    formDataBody.append("name", data.name);
+    formDataBody.append("email", data.email);
+    formDataBody.append("password", data.password);
+    formDataBody.append("files", data.files);
+    try {
+      await axios.post("http://localhost:8080/user/signup", formDataBody, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      navigator("/login");
+    } catch (err) {
+      console.log("Something wrong happened ", err.message);
+    }
   };
 
   return (
