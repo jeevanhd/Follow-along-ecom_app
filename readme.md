@@ -450,3 +450,49 @@
 - Implemented the logic to add quantity to cart functionality
 
 - Implemented the logic to update the quantity in the cart
+
+## Project Milestone 17
+
+### Implemented cart schema to store products
+
+- Created a cart schema to store products in the database
+
+- Implemented the logic to store products in the cart schema
+
+- Implemented the logic to fetch products from the cart schema
+
+- Implemented the logic to update products in the cart schema
+
+### Implemented an Endpoint to store receive and store product details in cart
+
+- Implemented an endpoint to store product details in the cart schema
+
+- Implemented the logic to receive product details from the frontend
+
+- Implemented the logic to store product details in the cart schema
+
+- Implemented the logic to send a response back to the frontend
+
+## Project Milestone 18
+
+### Implemented an Backend endpoint for cart page
+
+- Implemented an endpoint to fetch products from the cart schema
+
+- Implemented the logic to receive cart id from the frontend
+
+- Implemented the logic to fetch products from the cart schema
+
+### An Endpoint to get products inside cart for user
+
+- Implemented an endpoint to fetch products from the cart schema for a user
+
+- Implemented the logic to receive user id from the frontend
+
+- Implemented the logic to fetch products from the cart schema for the user
+
+### Endpoint to get products inside cart for user
+
+- Implemented an endpoint to fetch products from the cart schema for a user
+
+- Implemented the logic to receive user id from the frontend
