@@ -1,3 +1,6 @@
+import axios from "axios";
+import { Link } from "react-router-dom";
+
 function Card({
   title,
   image,
@@ -9,15 +12,29 @@ function Card({
   id,
   handelDelete,
 }) {
+  const handelAddToCart = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/cart/add-to-cart?token=${token}`,
+        { productId: id, quantity: 1 }
+      );
+    } catch (error) {
+      alert(error.message);
+      console.log(error);
+    }
+  };
   return (
     <div className="w-72 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       {/* Image Container */}
-      <div className="relative">
-        <img alt="Product" src={image} className="w-full h-48 object-cover" />
-        <span className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm font-semibold">
-          -20%
-        </span>
-      </div>
+      <Link to={`/product-details/${ele._id}`}>
+        <div className="relative">
+          <img alt="Product" src={image} className="w-full h-48 object-cover" />
+          <span className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm font-semibold">
+            -20%
+          </span>
+        </div>
+      </Link>
 
       {/* Content Container */}
       <div className="p-5">
@@ -42,7 +59,10 @@ function Card({
               ₹ {discountedPrice}
             </span>
           </div>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200">
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200"
+            onClick={handelAddToCart}
+          >
             Add to cart
           </button>
           <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200">

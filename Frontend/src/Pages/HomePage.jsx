@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Card from "../Components/ProductCard/Card.jsx";
 
 function HomePage() {
@@ -35,19 +34,17 @@ function HomePage() {
               style={{ margin: "auto" }}
               className="border border-white"
             >
-              <Link to={`/product-details/${ele._id}`}>
-                <Card
-                  title={ele.title}
-                  image={ele.image ? ele.image : "No image :/"}
-                  Index={index}
-                  description={ele.description}
-                  originalPrice={ele.originalPrice}
-                  discountedPrice={ele.discountPrice}
-                  rating={ele.rating}
-                  id={ele._id}
-                  handelDelete={handelDelete}
-                />
-              </Link>
+              <Card
+                title={ele.title}
+                image={ele.image ? ele.image : "No image :/"}
+                Index={index}
+                description={ele.description}
+                originalPrice={ele.originalPrice}
+                discountedPrice={ele.discountPrice}
+                rating={ele.rating}
+                id={ele._id}
+                handelDelete={handelDelete}
+              />
             </div>
           );
         })}

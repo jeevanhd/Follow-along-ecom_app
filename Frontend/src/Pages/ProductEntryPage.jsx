@@ -65,12 +65,17 @@ function ProductEntryPage() {
       formDataBody.append("filepath", ele);
     });
 
-    axios
-      .post(`http://localhost:8080/product/create-product`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+    const token = localStorage.getItem("token");
+    let requestData = axios
+      .post(
+        `http://localhost:8080/product/create-product?=${token}`,
+        formDataBody,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data);
       })

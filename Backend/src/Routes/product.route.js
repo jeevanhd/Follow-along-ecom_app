@@ -14,8 +14,7 @@ const {
 
 router.post(
   "/create-product",
-  upload.array("files", 3),
-  verifyUser,
+  [upload.array("files", 3), verifyUser],
   createProductController
 );
 
