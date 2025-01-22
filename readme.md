@@ -503,3 +503,11 @@
 
 - Implemented the cart UI using react and tailwind
 - Implemented the logic to fetch products from the cart schema
+
+## Project Milestone 20
+
+### Implemented Profile page
+
+- Implemented the profile page using react and tailwind
+- Implemented the logic to fetch user details from the user schema
+- Implemented the logic to update user details in the user schema
