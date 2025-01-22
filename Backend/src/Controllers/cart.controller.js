@@ -62,7 +62,7 @@ async function getCartProductController(req, res) {
       return res.status(401).send({ message: "Un-Authorized Please signup" });
     }
 
-    const data = await CartModel.find({ userId });
+    const data = await CartModel.find({ userId }).populate("productId");
     return res.status(200).send({
       message: "data successfully retrieved",
       success: true,

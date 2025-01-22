@@ -4,7 +4,7 @@ const {
   addToCartController,
   getCartProductController,
 } = require("../Controllers/cart.controller");
-const router = express.router();
+const router = express.Router();
 
 router.post("/add-to-cart", verifyUser, addToCartController);
 

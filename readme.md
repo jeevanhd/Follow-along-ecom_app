@@ -496,3 +496,10 @@
 - Implemented an endpoint to fetch products from the cart schema for a user
 
 - Implemented the logic to receive user id from the frontend
+
+## Project Milestone 19
+
+### Implemented Cart UI
+
+- Implemented the cart UI using react and tailwind
+- Implemented the logic to fetch products from the cart schema
