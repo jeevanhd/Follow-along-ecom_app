@@ -21,7 +21,7 @@ const InfoSection = ({ icon, label, value }) => {
   </div>;
 };
 
-export function ProfileCard() {
+const ProfileCard = () => {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
@@ -147,4 +147,6 @@ export function ProfileCard() {
       </Card>
     </div>
   );
-}
+};
+
+export default ProfileCard;

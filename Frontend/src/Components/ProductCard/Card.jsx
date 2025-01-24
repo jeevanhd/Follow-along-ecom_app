@@ -27,7 +27,7 @@ function Card({
   return (
     <div className="w-72 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       {/* Image Container */}
-      <Link to={`/product-details/${ele._id}`}>
+      <Link to={`/product-details/${id}`}>
         <div className="relative">
           <img alt="Product" src={image} className="w-full h-48 object-cover" />
           <span className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm font-semibold">
