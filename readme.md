@@ -511,3 +511,11 @@
 - Implemented the profile page using react and tailwind
 - Implemented the logic to fetch user details from the user schema
 - Implemented the logic to update user details in the user schema
+
+## Project Milestone 21
+
+### Implemented Address Page
+
+- Implemented the address page using react and tailwind
+- Implemented the logic to fetch user addresses from the user schema
+- Implemented the logic to add new address in the user schema
