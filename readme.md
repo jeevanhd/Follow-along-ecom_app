@@ -519,3 +519,11 @@
 - Implemented the address page using react and tailwind
 - Implemented the logic to fetch user addresses from the user schema
 - Implemented the logic to add new address in the user schema
+
+## Project Milestone 22
+
+### Implemented backend endpoint for address page
+
+- Implemented an endpoint to fetch user addresses from the user schema
+- Implemented the logic to receive user id from the frontend
+- Implemented the logic to fetch user addresses from the user schema

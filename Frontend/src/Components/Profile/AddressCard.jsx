@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddressCard = () => {
   const [formData, setFormData] = useState({
-    city: '',
-    country: '',
-    add1: '',
-    add2: '',
-    zipCode: '',
-    addressType: '',
+    city: "",
+    country: "",
+    add1: "",
+    add2: "",
+    zipCode: 0,
+    addressType: "",
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -21,12 +22,17 @@ const AddressCard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
     try {
-      const response = await axios.post('/api/addresses', formData);
-      console.log('Address submitted:', response.data);
+      const response = await axios.post(
+        `http:localhost:8080/user/add-address?token=${token}`,
+        formData
+      );
+      console.log("Address submitted:", response.data);
     } catch (error) {
-      console.error('Error submitting address:', error);
+      console.error("Error submitting address:", error);
     }
+    navigate("/profile");
   };
 
   return (
@@ -89,7 +95,11 @@ const AddressCard = () => {
           <option value="work">Work</option>
           <option value="other">Other</option>
         </select>
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded"
+          onClick={handleSubmit}
+        >
           Submit
         </button>
       </form>

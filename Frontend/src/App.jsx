@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar.jsx";
+import AddressCard from "./Components/Profile/AddressCard.jsx";
 import CartPage from "./Pages/CartPage.jsx";
 import HomePage from "./Pages/HomePage.jsx";
 import Login from "./Pages/Login.jsx";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/product-details/:id" element={<SinglePageProduct />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/add-address" element={<AddressCard />} />
       </Routes>
     </>
   );
