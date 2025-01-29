@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CartCard from "../Components/ProductCard/CartCard";
 
 const CartPage = () => {
@@ -24,6 +25,12 @@ const CartPage = () => {
 
   return (
     <div>
+      <Link to={"/select-address"}>
+        <button className="bg-slate-800 test-white px-5 py-6 rounded-md ml -40">
+          Checkout
+        </button>
+      </Link>
+
       {UsersCartData?.map((singleCartObject, index) => {
         return (
           <div key={index}>
