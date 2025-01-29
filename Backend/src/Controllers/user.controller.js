@@ -11,7 +11,7 @@ require("dotenv").config({
   path: "../config/.env",
 });
 
-async function CreateUser(req, res) {
+const CreateUser = async (req, res) => {
   const { Name, email, password } = req.body;
 
   const CheckUserPresent = await UserModel.findOne({
@@ -51,7 +51,7 @@ async function CreateUser(req, res) {
   await newUser.save();
 
   return res.send("User Created Successfully");
-}
+};
 
 const generateToken = (data) => {
   const token = jwt.sign(
@@ -70,7 +70,7 @@ const verifyUser = (token) => {
   }
 };
 
-async function verifyUserController(req, res) {
+const verifyUserController = async (req, res) => {
   const { token } = req.params;
   try {
     if (verifyUser(token)) {
@@ -83,7 +83,7 @@ async function verifyUserController(req, res) {
   } catch (er) {
     return res.status(403).send({ message: er.message });
   }
-}
+};
 
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
@@ -206,6 +206,26 @@ const AddAddressController = async (req, res) => {
   }
 };
 
+const GetAddressController = async (req, res) => {
+  const userId = req.userId;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(401).send({ message: "Please login, un-Authorized" });
+    }
+
+    const checkUser = await UserModel.findOne({ _id: userId }, { address: 1 });
+    if (!checkUser) {
+      return res.status(401).send({ message: "Please signup" });
+    }
+
+    return res
+      .status(200)
+      .send({ userInfo: checkUser, message: "Success", status: true });
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+};
+
 module.exports = {
   CreateUser,
   verifyUserController,
@@ -213,4 +233,5 @@ module.exports = {
   login,
   getUserData,
   AddAddressController,
+  GetAddressController,
 };
