@@ -528,7 +528,7 @@
 - Implemented the logic to receive user id from the frontend
 - Implemented the logic to fetch user addresses from the user schema
 
-### Project Milestone 23
+## Project Milestone 23
 
 ### Implemented Placing Order Page and Endpoint
 
@@ -536,3 +536,10 @@
 - Implemented the logic to receive user id and order details from the frontend
 - Implemented the logic to place an order in the order schema
 - Implemented the logic to update the cart schema after placing an order
+
+## Project Milestone 24
+
+### Implemented backend endpoint for placing order
+
+- Implemented an endpoint to place an order for a user
+- Implemented the logic to receive user id and order details from the frontend
