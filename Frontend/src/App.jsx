@@ -4,6 +4,7 @@ import AddressCard from "./Components/Profile/AddressCard.jsx";
 import CartPage from "./Pages/CartPage.jsx";
 import HomePage from "./Pages/HomePage.jsx";
 import Login from "./Pages/Login.jsx";
+import OrdersConformation from "./Pages/OrdersConformationPage.jsx";
 import ProductEntryPage from "./Pages/ProductEntryPage.jsx";
 import ProfilePage from "./Pages/ProfilePage.jsx";
 import SelectAddressPage from "./Pages/SelectAddressPage.jsx";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/add-address" element={<AddressCard />} />
         <Route path="/select-address" element={<SelectAddressPage />} />
+        <Route path="/order-confirmation" element={<OrdersConformation />} />
       </Routes>
     </>
   );
