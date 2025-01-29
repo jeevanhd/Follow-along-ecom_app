@@ -36,7 +36,7 @@ const CartPage = () => {
           <div key={index}>
             <CartCard
               title={singleCartObject.productId.title}
-              image={singleCartObject.productId.images[0]}
+              images={singleCartObject.productId.images[0]}
               description={singleCartObject.productId.description}
               originalPrice={singleCartObject.productId.originalPrice}
               discountedPrice={singleCartObject.productId.discountedPrice}
