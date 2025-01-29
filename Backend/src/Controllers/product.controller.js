@@ -81,7 +81,7 @@ const updateProductController = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const checkIfProductExist = await ProductModel.findOne(id);
+    const checkIfProductExist = await ProductModel.findOne({ _id: id });
 
     if (!checkIfProductExist) {
       return res.status(404).send({ message: "product not found" });

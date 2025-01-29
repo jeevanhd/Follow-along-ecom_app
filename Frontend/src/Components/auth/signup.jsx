@@ -15,7 +15,7 @@ const SignupForm = () => {
   const navigator = useNavigate();
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name == "file") {
+    if (name === "file") {
       setData({
         ...data,
         [name]: files[0],
@@ -35,13 +35,13 @@ const SignupForm = () => {
     const Emailv = Validate_obj.validateEmail(data.email);
     const Passv = Validate_obj.validatePassword(data.password);
 
-    if (typeof Namev == "string" && Namev.length > 1) {
+    if (typeof Namev === "string" && Namev.length > 1) {
       return setError(Namev);
     }
-    if (typeof Emailv == "string" && Emailv.length > 2) {
+    if (typeof Emailv === "string" && Emailv.length > 2) {
       return setError(Emailv);
     }
-    if (typeof Passv == "string" && Passv.length > 2) {
+    if (typeof Passv === "string" && Passv.length > 2) {
       return setError(Passv);
     }
 
@@ -51,7 +51,8 @@ const SignupForm = () => {
     formDataBody.append("name", data.name);
     formDataBody.append("email", data.email);
     formDataBody.append("password", data.password);
-    formDataBody.append("files", data.files);
+    formDataBody.append("file", data.file); 
+
     try {
       await axios.post("http://localhost:8080/user/signup", formDataBody, {
         headers: {
@@ -60,6 +61,7 @@ const SignupForm = () => {
       });
       navigator("/login");
     } catch (err) {
+      setError("Signup failed. Please try again."); 
       console.log("Something wrong happened ", err.message);
     }
   };
@@ -101,8 +103,7 @@ const SignupForm = () => {
           />
         </div>
 
-        {/* password  */}
-
+        {/* Password  */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Password
@@ -134,7 +135,7 @@ const SignupForm = () => {
               hover:file:bg-blue-100"
           />
         </div>
-        <p className="text-red">{error}</p>
+        {error && <p className="text-red-500">{error}</p>} 
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"

@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { data, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [information, setInformation] = useState({
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setInformation({
@@ -19,11 +20,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/user/login");
+      const response = await axios.post(
+        "http://localhost:8080/user/login",
+        information
+      ); // Send email and password
       localStorage.setItem("token", response.data.token);
-      console.log(data);
       navigate("/");
     } catch (err) {
+      setError("Login failed. Please check your credentials."); // Set error message
       console.log(err);
     }
   };
@@ -34,6 +38,8 @@ const Login = () => {
         <div className="text-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Login Form</h2>
         </div>
+        {error && <p className="text-red-500">{error}</p>}{" "}
+        {/* Display error message */}
         <form onSubmit={handleSubmit}>
           {/* Email Input */}
           <div className="mb-4">
