@@ -6,9 +6,11 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 const connectDatabase = require("./DB/database.js");
 const app = require("./app.js");
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 const server = app.listen(PORT, async () => {
   connectDatabase();
-  console.log(`The Server is running on Port:${PORT} URL: http://localhost:${PORT}`);
+  console.log(
+    `The Server is running on Port:${PORT} URL: http://localhost:${PORT}`
+  );
 });

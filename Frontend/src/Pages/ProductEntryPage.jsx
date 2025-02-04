@@ -58,10 +58,10 @@ function ProductEntryPage() {
     formDataBody.append("discountedPrice", discountedPrice);
     formDataBody.append("originalPrice", originalPrice);
     formDataBody.append("quantity", quantity);
-    formDataBody.append("rating", rating);
+    formDataBody.append("category", category);
     formDataBody.append("token", localStorage.getItem("token"));
 
-    images.map((ele) => {
+    images?.map((ele) => {
       formDataBody.append("filepath", ele);
     });
 
@@ -85,101 +85,126 @@ function ProductEntryPage() {
   };
 
   return (
-    <div
-      className="flex justify-center items-center border border-black"
-      style={{ height: "100vh" }}
-    >
-      <form onSubmit={HandelSubmit}>
-        <div>
-          <label htmlFor="">Enter Title</label>
-          <br />
+    <div className="flex justify-center items-center  bg-gray-100">
+      <form
+        onSubmit={HandelSubmit}
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg"
+      >
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Enter Title
+          </label>
           <input
             type="text"
             onChange={HandelChange}
             value={formData.title}
             name="title"
             placeholder="Enter product title"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
-        <div>
-          <label htmlFor="">Enter Description</label>
-          <br />
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Enter Description
+          </label>
           <input
             type="text"
             name="description"
             value={formData.description}
             onChange={HandelChange}
             placeholder="Enter product description"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        <div>
-          <label htmlFor="">Discount Price</label>
-          <br />
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Discount Price
+          </label>
           <input
             type="number"
             name="discountedPrice"
             value={formData.discountedPrice}
             onChange={HandelChange}
             placeholder="Discounted price"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
-        <div>
-          <label htmlFor="">Original Price</label>
-          <br />
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Original Price
+          </label>
           <input
             type="number"
             name="originalPrice"
             value={formData.originalPrice}
             onChange={HandelChange}
             placeholder="Original price"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        <div>
-          <label htmlFor="">Stock Quantity</label>
-          <br />
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Stock Quantity
+          </label>
           <input
             type="number"
             name="quantity"
             value={formData.quantity}
             onChange={HandelChange}
             placeholder="Enter Stock quantity"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        <div>
-          <label htmlFor="">Product Image</label>
-          <br />
-          <input type="file" multiple onChange={handelImageUpload} />
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Product Image
+          </label>
+          <input
+            type="file"
+            multiple
+            onChange={handelImageUpload}
+            className="block w-full text-sm text-gray-500"
+          />
         </div>
 
-        <div>
-          <label htmlFor="">Enter Category</label>
-          <br />
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Enter Category
+          </label>
           <input
             type="text"
             onChange={HandelChange}
             name="category"
             value={formData.category}
             placeholder="Enter Category"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
-        <div>
-          <label htmlFor="">Enter Rating of product</label>
-          <br />
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Enter Rating of product
+          </label>
           <input
             type="number"
             name="rating"
             value={formData.rating}
             onChange={HandelChange}
             placeholder="Enter Rating of product"
-            className="border border-black"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
-        {errorInput && <p>{errorInput}</p>}
-        <button type="submit" className="bg-blue-400 text-white px-5 py-1">
+        {errorInput && <p className="text-red-500">{errorInput}</p>}
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"
+        >
           Submit
         </button>
       </form>

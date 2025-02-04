@@ -81,18 +81,6 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                      : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                  }
-                >
-                  My Products
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
                   to="/product-entry-page"
                   className={({ isActive }) =>
                     isActive
@@ -113,6 +101,30 @@ const Navbar = () => {
                   }
                 >
                   Cart
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                      : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                  }
+                >
+                  Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/add-address"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                      : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                  }
+                >
+                  Add Address
                 </NavLink>
               </li>
             </ul>
@@ -140,20 +152,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/myproducts"
-                className={({ isActive }) =>
-                  isActive
-                    ? "block text-white font-semibold px-3 py-2 rounded-md text-base transition-colors duration-200"
-                    : "block text-gray-200 hover:text-white px-3 py-2 rounded-md text-base transition-colors duration-200"
-                }
-                onClick={() => setIsOpen(false)}
-              >
-                My Products
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/addproducts"
+                to="/product-entry-page"
                 className={({ isActive }) =>
                   isActive
                     ? "block text-white font-semibold px-3 py-2 rounded-md text-base transition-colors duration-200"
@@ -175,6 +174,32 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
               >
                 Cart
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block text-white font-semibold px-3 py-2 rounded-md text-base transition-colors duration-200"
+                    : "block text-gray-200 hover:text-white px-3 py-2 rounded-md text-base transition-colors duration-200"
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/add-address"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block text-white font-semibold px-3 py-2 rounded-md text-base transition-colors duration-200"
+                    : "block text-gray-200 hover:text-white px-3 py-2 rounded-md text-base transition-colors duration-200"
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                Add Address
               </NavLink>
             </li>
           </ul>

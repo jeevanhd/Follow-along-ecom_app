@@ -12,45 +12,47 @@ require("dotenv").config({
 });
 
 const CreateUser = async (req, res) => {
-  const { Name, email, password } = req.body;
 
-  const CheckUserPresent = await UserModel.findOne({
-    email: email,
-  });
+  const users = req.body.users; // Expecting an array of user objects
 
-  if (CheckUserPresent) {
-    const error = new ErrorHandler("Already Present in DB", 400);
 
-    return res.status(404).send({
-      message: error.message,
-      status: error.statusCode,
-      success: false,
+
+  try {
+    if (!Array.isArray(users) || users.length === 0) {
+      return res.status(400).send({ message: "Send valid users array" });
+    }
+
+    const createdUsers = await Promise.all(users.map(async (user) => {
+      const { Name, email, password } = user;
+
+      const CheckUserPresent = await UserModel.findOne({ email: email });
+      if (CheckUserPresent) {
+        throw new ErrorHandler("User already present in DB", 400);
+      }
+
+      const newUser = new UserModel({ Name, email, password });
+      await newUser.save();
+
+      const token = generateToken({ Name, email });
+      await transporter.sendMail({
+        to: email,
+        from: "jeevanhd1313@gmail.com",
+        subject: "Verification email from follow along project",
+        html: `<h1>Hello world, activate your account at http://localhost:5173/activation/${token}</h1>`,
+      });
+
+      return newUser;
+    }));
+
+    return res.status(201).send({
+      message: "Users created successfully",
+      success: true,
+      createdUsers,
     });
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
   }
 
-  const newUser = new UserModel({
-    Name: Name,
-    email: email,
-    password: password,
-  });
-
-  const data = {
-    Name,
-    email,
-    password,
-  };
-  const token = generateToken(data);
-  await transporter.sendMail({
-    to: "jeevanhd1313@gmail.com",
-    from: "jeevanhd1313@gmail.com",
-    subject: "verification email from follow along project",
-    text: "Text",
-    html: `<h1>Hello world   http://localhost:5173/activation/${token} </h1>`,
-  });
-
-  await newUser.save();
-
-  return res.send("User Created Successfully");
 };
 
 const generateToken = (data) => {
@@ -79,49 +81,55 @@ const verifyUserController = async (req, res) => {
         .cookie("token", token)
         .json({ token, success: true });
     }
-    return res.status(403).send({ message: "token expired" });
+    return res.status(403).send({ message: "Token expired" });
   } catch (er) {
     return res.status(403).send({ message: er.message });
   }
 };
 
 const signup = async (req, res) => {
-  const { name, email, password } = req.body;
+  const users = req.body.users; // Expecting an array of user objects
+
   try {
-    const checkUserPresentInDB = await UserModel.findOne({ email: email });
-    if (checkUserPresentInDB) {
-      return res.status(403).send({ message: "User already present" });
+    if (!Array.isArray(users) || users.length === 0) {
+      return res.status(400).send({ message: "Send valid users array" });
     }
 
-    const imageAddress = await cloudinary.UploadStream.upload(req.file.path, {
-      folder: "uploads",
-    }).then((res) => {
-      fs.unlinkSync(req.file.path);
-      return res.url;
-    });
+    const createdUsers = await Promise.all(users.map(async (user) => {
+      const { name, email, password } = user;
+      let imageAddress = null;
 
-    bcrypt.hash(password, 10, async function (err, hashedPassword) {
-      try {
-        if (err) {
-          return res.status(403).send({ message: err.message });
-        }
-        await UserModel.create({
-          Name: name,
-          email,
-          password: hashedPassword,
-          avatar: {
-            url: imageAddress,
-            public_id: `${email}_public_id`,
-          },
-        });
-
-        return res.status(201).send({ message: "User created successfully.." });
-      } catch (er) {
-        return res.status(500).send({ message: er.message });
+      const checkUserPresentInDB = await UserModel.findOne({ email: email });
+      if (checkUserPresentInDB) {
+        throw new Error("User already present");
       }
-    });
-  } catch (er) {
-    return res.status(500).send({ message: er.message });
+
+      if (req.file) {
+        imageAddress = await cloudinary.UploadStream.upload(req.file.path, {
+          folder: "uploads",
+        }).then((res) => {
+          fs.unlinkSync(req.file.path);
+          return res.url;
+        });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      await UserModel.create({
+        Name: name,
+        email,
+        password: hashedPassword,
+        avatar: imageAddress ? {
+          url: imageAddress,
+          public_id: `${email}_public_id`,
+        } : null,
+      });
+
+      return { name, email };
+    }));
+
+    return res.status(201).send({ message: "Users created successfully", createdUsers });
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
   }
 };
 
@@ -135,7 +143,7 @@ const login = async (req, res) => {
       checkUserPresentInDB.password,
       function (err, result) {
         if (err) {
-          return res.status(403).send({ message: er.message, success: false });
+          return res.status(403).send({ message: err.message, success: false });
         }
         let data = {
           id: checkUserPresentInDB._id,
@@ -145,6 +153,8 @@ const login = async (req, res) => {
         const token = generateToken(data);
 
         return res.status(200).cookie("token", token).send({
+          message: "User logged in successfully..",
+          success: true,
           message: "User logged in successfully..",
           success: true,
           token,
