@@ -12,7 +12,10 @@ require("dotenv").config({
 });
 
 const CreateUser = async (req, res) => {
+
   const users = req.body.users; // Expecting an array of user objects
+
+
 
   try {
     if (!Array.isArray(users) || users.length === 0) {
@@ -49,6 +52,7 @@ const CreateUser = async (req, res) => {
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }
+
 };
 
 const generateToken = (data) => {
