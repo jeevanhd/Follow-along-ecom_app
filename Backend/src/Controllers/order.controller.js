@@ -1,8 +1,8 @@
 const { default: mongoose } = require("mongoose");
-const OrderModel = require("../Model/order.model.js");
 const UserModel = require("../Model/user.model.js");
+const orderModel = require("../Model/order.model.js");
 
-const createOrder = async (req, res) => {
+const createOrderController = async (req, res) => {
   const userId = req.userId;
   const { Items, address, totalAmount } = req.body;
 
@@ -26,7 +26,7 @@ const createOrder = async (req, res) => {
         .json({ message: "Items are required", success: false });
     }
 
-    const order = await OrderModel.create({
+    const order = await orderModel.create({
       user: userId,
       OrderItems: Items,
       shippingAddress: address,
@@ -41,6 +41,32 @@ const createOrder = async (req, res) => {
   }
 };
 
+const getUserOrderController = async (req, res) => {
+  const userId = req.userId;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res
+        .status(400)
+        .send({ message: "inValid user id", success: false });
+    }
+
+    const checkUser = await UserModel.findOne({ _id: userId });
+    if (!checkUser) {
+      return res
+        .status(400)
+        .send({ message: "Please sign up", success: false });
+    }
+
+    const order = await orderModel.find({ user: userId });
+    return res
+      .status(200)
+      .send({ message: "Data Fetched successfully", success: true, order });
+  } catch (error) {
+    return res.status(500).send({ message: error.message, success: false });
+  }
+};
+
 module.exports = {
-  createOrder,
+  createOrderController,
+  getUserOrderController,
 };

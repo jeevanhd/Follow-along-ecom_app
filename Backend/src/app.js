@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const userRouter = require("./Routes/user.route.js");
 const productRouter = require("./Routes/product.route.js");
 const cartRouter = require("./Routes/cart.router.js");
+const orderRouter = require("./Routes/order.route.js");
 
 if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({
@@ -25,5 +26,6 @@ app.get("/", (req, res) => {
 app.use("/user", userRouter);
 app.use("/product", productRouter);
 app.use("/cart", cartRouter);
+app.use("/order", orderRouter);
 
 module.exports = app;

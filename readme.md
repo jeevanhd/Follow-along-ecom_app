@@ -551,3 +551,11 @@
 - Implemented an endpoint to create an order for a user
 - Implemented the logic to receive user id and order details from the frontend
 - Implemented the logic to create an order in the order schema
+
+## Project Milestone 26
+
+### Implemented backend endpoint for getting order
+
+- Implemented an endpoint to get an order for a user
+- Implemented the logic to receive user id from the frontend
+- Implemented the logic to get an order from the order schema
