@@ -13,6 +13,7 @@ const SignupForm = () => {
   const [error, setError] = useState("");
 
   const navigator = useNavigate();
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "file") {
@@ -51,7 +52,7 @@ const SignupForm = () => {
     formDataBody.append("name", data.name);
     formDataBody.append("email", data.email);
     formDataBody.append("password", data.password);
-    formDataBody.append("file", data.file); 
+    formDataBody.append("file", data.file);
 
     try {
       await axios.post("http://localhost:8080/user/signup", formDataBody, {
@@ -61,7 +62,7 @@ const SignupForm = () => {
       });
       navigator("/login");
     } catch (err) {
-      setError("Signup failed. Please try again."); 
+      setError("Signup failed. Please try again.");
       console.log("Something wrong happened ", err.message);
     }
   };
@@ -135,7 +136,7 @@ const SignupForm = () => {
               hover:file:bg-blue-100"
           />
         </div>
-        {error && <p className="text-red-500">{error}</p>} 
+        {error && <p className="text-red-500">{error}</p>}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"

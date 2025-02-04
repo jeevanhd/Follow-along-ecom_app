@@ -17,6 +17,7 @@ const Login = () => {
   };
 
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -95,3 +96,5 @@ const Login = () => {
 };
 
 export default Login;
+
+// {"message":"User logged in successfully..","success":true,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwiaWQiOiI2NzliM2JhODY0NTM3OTkzYWRhNGY1YWMiLCJpYXQiOjE3MzgyMjY2MjB9.wwHkzTU7i4xBDrGkh73f2Oz38R3e7LkkfxedNFhsy90"}

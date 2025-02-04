@@ -5,18 +5,23 @@ if (process.env.NODE !== "PRODUCTION") {
 }
 
 const verifyUser = (req, res, next) => {
-  const token = req.query;
+  const token = req.query.token;
+  
   if (!token) {
     return res.status(404).send({
-      message: "Send token over request",
+      message: "Token is required in the request",
     });
   }
 
-  const data = jwt.verify(token, process.env.SECRET_KEY);
-  req.userEmailAddress = data.email;
-  req.UserId = data.id;
+  try {
+    const data = jwt.verify(token, process.env.SECRET_KEY);
+    req.userEmailAddress = data.email;
+    req.UserId = data.id;
 
-  next();
+    next();
+  } catch (error) {
+    return res.status(403).send({ message: "Invalid token" });
+  }
 };
 
 module.exports = verifyUser;
