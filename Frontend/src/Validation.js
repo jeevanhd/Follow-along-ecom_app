@@ -19,20 +19,20 @@ const Validate_obj = {
       hasSpecialChar: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
     };
     if (password.length < passwordRegex.minLength) {
-      return "More letters!!!";
+      return "Password must be at least 8 characters long.";
     }
     if (password.length > passwordRegex.maxLength) {
-      return "Too much letter";
+      return "Password must be less than 128 characters.";
     }
 
     if (passwordRegex.hasLowerCase.test(password) == false) {
-      return "";
+      return "Password must contain at least one lowercase letter.";
     }
     if (passwordRegex.hasUpperCase.test(password) == false) {
-      return "";
+      return "Password must contain at least one uppercase letter.";
     }
     if (passwordRegex.hasSpecialChar.test(password) == false) {
-      return "";
+      return "Password must contain at least one special character.";
     }
     return true;
   },
@@ -40,12 +40,13 @@ const Validate_obj = {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (email.length > 254) {
-      // RFC 5321
-
       return { isValid: false, error: "Email is too long" };
+    }
+    if (!emailRegex.test(email)) {
+      return { isValid: false, error: "Invalid email format" };
     }
     return true;
   },
 };
 
-export default Validate_obj
+export default Validate_obj;

@@ -2,7 +2,6 @@ const multer = require("multer");
 const cloudinary = require("../utilities/cloudinary.js");
 const fs = require("fs");
 const ProductModel = require("../Model/Product.model.js");
-const { createHashRouter } = require("react-router-dom");
 
 const createProductController = async (req, res) => {
   const {
@@ -16,7 +15,7 @@ const createProductController = async (req, res) => {
   } = req.body;
 
   try {
-    const arrayImage = req.files.map(async (singleFile, index) => {
+    const arrayImage = req.files.map(async (singleFile) => {
       return cloudinary.uploader
         .upload(singleFile.path, {
           folder: "uploads",
@@ -87,7 +86,7 @@ const updateProductController = async (req, res) => {
       return res.status(404).send({ message: "product not found" });
     }
 
-    const imageArray = req.files.map((singleFile, index) => {
+    const imageArray = req.files.map((singleFile) => {
       return cloudinary.uploader
         .upload(singleFile.path, {
           folder: "uploads",
@@ -140,7 +139,7 @@ const getSingleProductDocumentController = async (req, res) => {
       .status(200)
       .send({ message: "Product fetched ", data, success: true });
   } catch (err) {
-    return re.status(500).send({ message: err.message, success: false });
+    return res.status(500).send({ message: err.message, success: false });
   }
 };
 

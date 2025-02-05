@@ -5,20 +5,20 @@ const OrderSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      require: true,
+      required: true,
     },
     OrderItems: [
-      { type: mongoose.Types.ObjectId, ref: "Product", require: true },
+      { type: mongoose.Types.ObjectId, ref: "Product", required: true },
     ],
     shippingAddress: {
-      country: { type: String, require: true },
-      city: { type: String, require: true },
-      address1: { type: String, require: true },
+      country: { type: String, required: true },
+      city: { type: String, required: true },
+      address1: { type: String, required: true },
       address2: { type: String },
-      zipCode: { type: Number, require: true },
-      addressType: { type: String, require: true },
+      zipCode: { type: Number, required: true },
+      addressType: { type: String, required: true },
     },
-    totalAmount: { type: Number, require: true, default: 0 },
+    totalAmount: { type: Number, required: true, default: 0 },
     orderStatus: {
       type: String,
       enum: ["Processing", "Shipped", "Delivered", "Cancelled"],
