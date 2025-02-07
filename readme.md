@@ -567,3 +567,11 @@
 - Implemented the order page using react and tailwind
 - Implemented the logic to fetch user orders from the order schema
 - Implemented the logic to add new order in the order schema
+
+## Project Milestone 28
+
+### Implemented connection between backend and frontend orders page
+
+- Implemented the logic to fetch user orders from the order schema
+- Implemented the logic to add new order in the order schema
+- Implemented the logic to update the order schema after adding a new order

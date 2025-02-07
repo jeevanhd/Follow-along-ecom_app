@@ -85,7 +85,43 @@ const getUserOrderController = async (req, res) => {
   }
 };
 
+const cancelOrderController = async (req, res) => {
+  const userId = req.userId;
+  const orderId = req.query.orderId;
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res
+        .status(400)
+        .send({ message: "Invalid user id", success: false });
+    }
+    if (!mongoose.Types.ObjectId.isValid(orderId)) {
+      return res
+        .status(400)
+        .send({ message: "Invalid user id", success: false });
+    }
+
+    await OrderModel.findByIdAndUpdate(
+      { _id: orderId },
+      {
+        orderStatus: "Cancelled",
+      },
+      {
+        new: true,
+      }
+    );
+
+    return res.status(200).send({
+      message: "Order Cancelled Successfully",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+};
+
 module.exports = {
   createOrderController,
   getUserOrderController,
+  cancelOrderController,
 };
