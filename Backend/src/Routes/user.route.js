@@ -1,13 +1,13 @@
 const express = require("express");
 const multer = require("multer");
 const {
-  CreateUser,
-  verifyUserController,
-  signup,
-  login,
-  getUserData,
-  AddAddressController,
-  GetAddressController,
+    CreateUser,
+    verifyUserController,
+    signup,
+    login,
+    getUserData,
+    AddAddressController,
+    GetAddressController,
 } = require("../Controllers/user.controller.js");
 const jwt = require("jsonwebtoken");
 const verifyUser = require("../Middlewares/jwt-verify.js");

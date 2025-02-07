@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const VerifyToken = require("../Middlewares/jwt-verify");
 const {
-  createOrderController,
-  getUserOrderController,
+    createOrderController,
+    getUserOrderController,
 } = require("../Controllers/order.controller");
 
 router.post("/confirm-order", VerifyToken, createOrderController);

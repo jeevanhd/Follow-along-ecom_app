@@ -13,24 +13,33 @@ import SinglePageProduct from "./Pages/SingleProductPage.jsx";
 import UpdateForm from "./Pages/updateForm.jsx";
 
 function App() {
-  return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/product-entry-page" element={<ProductEntryPage />} />
-        <Route path="/update-form/:id" element={<UpdateForm />} />
-        <Route path="/product-details/:id" element={<SinglePageProduct />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/add-address" element={<AddressCard />} />
-        <Route path="/select-address" element={<SelectAddressPage />} />
-        <Route path="/order-confirmation" element={<OrdersConformation />} />
-      </Routes>
-    </>
-  );
+    return (
+        <>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+                <Route
+                    path="/product-entry-page"
+                    element={<ProductEntryPage />}
+                />
+                <Route path="/update-form/:id" element={<UpdateForm />} />
+                <Route
+                    path="/product-details/:id"
+                    element={<SinglePageProduct />}
+                />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/add-address" element={<AddressCard />} />
+                <Route path="/select-address" element={<SelectAddressPage />} />
+                <Route
+                    path="/order-confirmation"
+                    element={<OrdersConformation />}
+                />
+            </Routes>
+        </>
+    );
 }
 
 export default App;
