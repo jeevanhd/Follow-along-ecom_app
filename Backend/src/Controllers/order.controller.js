@@ -20,7 +20,7 @@ const createOrderController = async (req, res) => {
         .json({ message: "User not found", success: false });
     }
 
-    if (!Items) {
+    if (!Items || Items.length === 0) { 
       return res
         .status(400)
         .json({ message: "Items are required", success: false });
@@ -52,17 +52,19 @@ const getUserOrderController = async (req, res) => {
 
     const checkUser = await UserModel.findOne({ _id: userId });
     if (!checkUser) {
-      return res
-        .status(400)
-        .send({ message: "Please sign up", success: false });
+      return res.status(401).send({ message: "Please sign up" });
     }
 
     const order = await orderModel.find({ user: userId });
+    if (!order || order.length === 0) { 
+      return res.status(404).send({ message: "No orders found for this user." });
+    }
+
     return res
       .status(200)
       .send({ message: "Data Fetched successfully", success: true, order });
   } catch (error) {
-    return res.status(500).send({ message: error.message, success: false });
+    return res.status(500).send({ message: error.message });
   }
 };
 
