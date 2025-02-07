@@ -1,8 +1,8 @@
 const express = require("express");
 const verifyUser = require("../Middlewares/jwt-verify");
 const {
-  addToCartController,
-  getCartProductController,
+    addToCartController,
+    getCartProductController,
 } = require("../Controllers/cart.controller");
 const router = express.Router();
 
