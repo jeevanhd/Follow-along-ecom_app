@@ -2,77 +2,89 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Card({
-    title,
-    image,
-    Index,
-    description,
-    originalPrice,
-    discountedPrice,
-    rating,
-    id,
-    handelDelete,
+  title,
+  image,
+  Index,
+  description,
+  originalPrice,
+  discountedPrice,
+  rating,
+  id,
+  handelDelete,
 }) {
-    const handelAddToCart = async () => {
-        const token = localStorage.getItem("token");
-        try {
-            const response = await axios.post(
-                `http://localhost:8080/cart/add-to-cart?token=${token}`,
-                { productId: id, quantity: 1 }
-            );
-        } catch (error) {
-            alert(error.message);
-            console.log(error);
-        }
-    };
+  const handelAddToCart = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/cart/add-to-cart?token=${token}`,
+        { productId: id, quantity: 1 }
+      );
+    } catch (error) {
+      alert(error.message);
+      console.log(error);
+    }
+  };
 
-    return (
-        <div className="max-w-sm mx-auto bg-white rounded-lg shadow p-4 mb-4">
-            <Link to={`/product-details/${id}`}>
-                <img
-                    src={image}
-                    alt="Product"
-                    className="rounded-lg object-cover w-full h-48"
-                />
-            </Link>
-            <div className="p-5">
-                <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
-                <p className="text-gray-600">{description}</p>
-                <div className="flex items-center mb-2">
-                    <span className="text-yellow-500">
-                        {"★".repeat(rating)}
-                    </span>
-                    <span className="text-gray-600 ml-2">({rating})</span>
-                </div>
-                <div className="flex items-center justify-between mt-4">
-                    <div>
-                        <span className="text-2xl font-bold">
-                            ₹{originalPrice}
-                        </span>
-                        <span className="text-gray-500 line-through ml-2">
-                            ₹{discountedPrice}
-                        </span>
-                    </div>
-                </div>
-                <div>
-                    <button
-                        className="bg-blue-600 hover:bg-blue-700 text-white text-sm py-1 px-3 rounded-lg transition-colors duration-200"
-                        onClick={handelAddToCart}
-                    >
-                        Add to cart
-                    </button>
-                    <button
-                        className="bg-blue-600 hover:bg-blue-700 text-white text-sm py-1 px-3 rounded-lg transition-colors duration-200"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handelDelete(id);
-                        }}
-                    >
-                        Delete
-                    </button>
-                </div>
-            </div>
+  return (
+    <div className="w-80 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+      {/* Image Container */}
+      <div className="relative">
+        <Link to={`/product-details/${id}`}>
+          <img
+            src={image}
+            className="w-full h-48 object-cover"
+            alt="Product Image missing"
+          />
+        </Link>
+        <span className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm font-semibold">
+          -20%
+        </span>
+      </div>
+
+      {/* Content Container */}
+      <div className="p-5">
+        {/* Title */}
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">{title}</h3>
+
+        {/* Description */}
+        <p className="text-gray-600 text-sm mb-4">{description}</p>
+
+        {/* Rating */}
+        <div className="flex items-center mb-4">
+          <span className="ml-2 text-sm text-gray-600">({rating})</span>
         </div>
-    );
+
+        {/* Price Section */}
+        <div className="flex items-center justify-between">
+          <div>
+            <span className="text-xl font-bold text-gray-900">
+              ₹{originalPrice}
+            </span>
+            <span className="ml-2 text-sm text-gray-500 line-through">
+              {discountedPrice}
+            </span>
+          </div>
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200"
+            onClick={handelAddToCart}
+          >
+            Add to cart
+          </button>
+          <Link to={`/update-form/${id}`}>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200">
+              Update
+            </button>
+          </Link>
+        </div>
+        <button
+          className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors duration-200"
+          onClick={() => handelDelete(id)}
+        >
+          🗑️
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default Card;

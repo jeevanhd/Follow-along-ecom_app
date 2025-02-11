@@ -8,18 +8,21 @@ const CartPage = () => {
 
   useEffect(() => {
     const getCartData = async () => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token"); 
+      console.log("Token retrieved:", token);
+
 
       if (!token) {
         return alert("Token is missing");
       }
 
       const response = await axios.get(
-        `http://localhost:8080/cart/get-user-cart-data?token=${token}`
+        `http://localhost:8080/cart/get-cart-data?token=${token}`
       );
       console.log(response);
       setUsersCartData(response.data.cartData);
     };
+
     getCartData();
   }, []);
 
@@ -32,18 +35,18 @@ const CartPage = () => {
               Checkout
             </button>
           </Link>
-          {UsersCartData?.map((singleCartObject, index) => {
+          {UsersCartData?.map((data, index) => {
             return (
               <div key={index}>
                 <CartCard
-                  title={singleCartObject.productId.title}
-                  images={singleCartObject.productId.images[0]}
+                  title={data.productId.title}
+                  images={data.productId.images[0]}
                   //   Index={index}
-                  description={singleCartObject.productId.description}
-                  originalPrice={singleCartObject.productId.originalPrice}
-                  discountedPrice={singleCartObject.productId.discountedPrice}
-                  id={singleCartObject.productId._id}
-                  createdBy={"nayan@k.com"}
+                  description={data.productId.description}
+                  originalPrice={data.productId.originalPrice}
+                  discountedPrice={data.productId.discountedPrice}
+                  id={data.productId._id}
+                  createdBy={"jeev@hd.com"}
                 />
               </div>
             );

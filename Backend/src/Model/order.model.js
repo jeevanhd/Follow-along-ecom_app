@@ -7,6 +7,7 @@ const OrderSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+
     OrderItems: {
       type: mongoose.Types.ObjectId,
       ref: "Product",
@@ -21,12 +22,19 @@ const OrderSchema = new mongoose.Schema(
       zipCode: { type: Number, required: true },
       addressType: { type: String, required: true },
     },
-    totalAmount: { type: Number, required: true, default: 0 },
+
+    totalAmount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+
     orderStatus: {
       type: String,
       enum: ["Processing", "Shipped", "Delivered", "Cancelled"],
       default: "Processing",
     },
+
     deliveredAt: { type: Date },
   },
   { timestamps: true }
