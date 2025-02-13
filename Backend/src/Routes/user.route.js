@@ -1,18 +1,18 @@
 const express = require("express");
+const router = express.Router();
 const multer = require("multer");
 const {
-    CreateUser,
-    verifyUserController,
-    signup,
-    login,
-    getUserData,
-    AddAddressController,
-    GetAddressController,
+  CreateUser,
+  verifyUserController,
+  signup,
+  login,
+  getUserData,
+  AddAddressController,
+  GetAddressController,
 } = require("../Controllers/user.controller.js");
 const jwt = require("jsonwebtoken");
 const verifyUser = require("../Middlewares/jwt-verify.js");
 const upload = multer({ dest: "temp-uploads/" });
-const router = express.Router();
 
 router.get("/activation/:token", verifyUserController);
 router.get("/user-data", verifyUser, getUserData);

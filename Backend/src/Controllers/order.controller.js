@@ -1,10 +1,10 @@
-const { mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const UserModel = require("../Model/user.model.js");
 const OrderModel = require("../Model/order.model.js");
 const CartModel = require("../Model/cart.model.js");
 
 const createOrderController = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.UserId;
   const { Items, address, totalAmount } = req.body;
 
   try {
@@ -14,7 +14,7 @@ const createOrderController = async (req, res) => {
         .json({ message: "Invalid user id", success: false });
     }
 
-    const checkUser = await UserModel.findById(userId);
+    const checkUser = await UserModel.findOne({ _id: userId });
     if (!checkUser) {
       return res
         .status(400)
@@ -54,7 +54,7 @@ const createOrderController = async (req, res) => {
 };
 
 const getUserOrderController = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.UserId;
   try {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res
@@ -64,7 +64,9 @@ const getUserOrderController = async (req, res) => {
 
     const checkUser = await UserModel.findOne({ _id: userId });
     if (!checkUser) {
-      return res.status(401).send({ message: "Please sign up" });
+      return res
+        .status(401)
+        .send({ message: "Please sign up", success: false });
     }
 
     const orders = await OrderModel.find(
@@ -78,7 +80,7 @@ const getUserOrderController = async (req, res) => {
     return res.status(200).send({
       message: "Data Fetched successfully",
       success: true,
-      order,
+      orders,
     });
   } catch (error) {
     return res.status(500).send({ message: error.message });
@@ -86,7 +88,7 @@ const getUserOrderController = async (req, res) => {
 };
 
 const cancelOrderController = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.UserId;
   const orderId = req.query.orderId;
 
   try {
@@ -98,7 +100,7 @@ const cancelOrderController = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(orderId)) {
       return res
         .status(400)
-        .send({ message: "Invalid user id", success: false });
+        .send({ message: "Invalid Order id", success: false });
     }
 
     await OrderModel.findByIdAndUpdate(

@@ -8,9 +8,9 @@ const cartRouter = require("./Routes/cart.router.js");
 const orderRouter = require("./Routes/order.route.js");
 
 if (process.env.NODE_ENV !== "PRODUCTION") {
-    require("dotenv").config({
-        path: "./src/config/.env",
-    });
+  require("dotenv").config({
+    path: "./src/config/.env",
+  });
 }
 
 const app = express();
@@ -20,7 +20,7 @@ app.use(cors());
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-    return res.send("Welcome to backend");
+  return res.send("Welcome to backend");
 });
 
 app.use("/user", userRouter);
