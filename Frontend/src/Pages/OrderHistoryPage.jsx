@@ -8,32 +8,40 @@ const OrderHistoryPage = () => {
   const fetchOrderProducts = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      console.log("Token not found");
+      return alert("Token not found");
     }
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/orders/user-orders-data?token=${token}`
+      );
 
-    const response = await axios.get(
-      `http://localhost:8080/orders/user-orders-data?token=${token}`
-    );
-
-    const reverseData = response.data.orders?.reverse();
-    setOrderData(reverseData);
-    console.log(response.data.orders);
+      const reverseData = response.data.orders?.reverse();
+      setOrderData(reverseData);
+      console.log(response.data.orders);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
     fetchOrderProducts();
   }, []);
 
-  const handelCancelOrder = async (id) => {
+  const handleCancelOrder = async (id) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      console.log("Token not found");
+      return alert("Token not found");
     }
 
-    await axios.patch(
-      `http://localhost:8080/orders/cancel-order?token=${token}&orderId=${id}`
-    );
-    fetchOrderProducts();
+    try {
+      await axios.patch(
+        `http://localhost:8080/orders/cancel-order?token=${token}&orderId=${id}`
+      );
+
+      fetchOrderProducts();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -51,7 +59,7 @@ const OrderHistoryPage = () => {
               id={data._id}
               orderStatus={data.orderStatus}
               createdBy={"jeev@hd.com"}
-              handelCancelOrder={handelCancelOrder}
+              handleCancelOrder={handleCancelOrder}
             />
           </div>
         );

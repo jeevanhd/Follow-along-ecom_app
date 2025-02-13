@@ -5,16 +5,21 @@ import Card from "../Components/ProductCard/Card.jsx";
 function HomePage() {
   const [data, setData] = useState();
 
-  const fetchedProducts = async () => {
-    const response = await axios.get(
-      `http://localhost:8080/product/get-products`
-    );
-    setData(response.data.data);
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/product/get-products`
+      );
+
+      setData(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
     const callHandel = async () => {
-      fetchedProducts();
+      fetchProducts();
     };
     callHandel();
   }, []);
@@ -38,7 +43,7 @@ function HomePage() {
                 Index={index}
                 description={ele.description}
                 originalPrice={ele.originalPrice}
-                discountedPrice={ele.discountPrice}
+                discountedPrice={ele.discountedPrice}
                 rating={ele.rating}
                 id={ele._id}
                 handelDelete={handelDelete}

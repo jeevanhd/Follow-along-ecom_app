@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartCard from "../Components/ProductCard/CartCard";
 
-const OrdersConformation = () => {
-  const [cartData, setCartData] = useState();
+const OrderConfirmation = () => {
+  const [cartData, setCartData] = useState([]);
+
   const [total, setTotal] = useState(0);
   const [userAddress, setAddress] = useState(
     JSON.parse(localStorage.getItem("address")) || {}
@@ -17,38 +18,48 @@ const OrdersConformation = () => {
       if (!token) {
         return alert("Token missing");
       }
-      const response = await axios.get(
-        `http://localhost:8080/cart/get-user-cart-data?token=${token}`
-      );
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/cart/get-user-cart-data?token=${token}`
+        );
 
-      let sum = 0;
-      response.data.forEach((ele, index) => {
-        sum += ele.productId.originalPrice;
-      });
-      setTotal(sum);
+        let sum = 0;
+        response.data.forEach((ele, index) => {
+          sum += ele.productId.originalPrice;
+        });
+        setTotal(sum);
 
-      setCartData(response.data.cartData);
+        setCartData(response.data.cartData);
+      } catch (err) {
+        console.error("Error fetching cart data:", err);
+        alert("Failed to fetch cart data. Please try again.");
+      }
     };
 
     getCartData();
   }, []);
 
-  const orderConfirmation = async () => {
+  const OrderConfirmation = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      return console.log("Token missing");
+      return alert("Token missing");
+    }
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/orders/confirm-order?token=${token}`,
+        {
+          Items: cartData,
+          address: userAddress,
+          totalAmount: total,
+        }
+      );
+    } catch (error) {
+      alert("Failed to confirm order. Please try again.");
+      console.error("Error confirming order:", error);
     }
 
-    const response = await axios.post(
-      `http://localhost:8080/orders/confirm-order?token=${token}`,
-      {
-        Items: cartData,
-        address: userAddress,
-        totalAmount: total,
-      }
-    );
-
     navigate("/order-history");
+
     console.log(response.data);
   };
 
@@ -100,7 +111,7 @@ const OrdersConformation = () => {
         <div className="flex justify-center mt-5">
           <button
             className="px-5 py-2 rounded-lg bg-blue-500 text-white hover:bg-green-500"
-            onClick={orderConfirmation}
+            onClick={OrderConfirmation}
           >
             Confirm order
           </button>
@@ -110,4 +121,4 @@ const OrdersConformation = () => {
   );
 };
 
-export default OrdersConformation;
+export default OrderConfirmation;

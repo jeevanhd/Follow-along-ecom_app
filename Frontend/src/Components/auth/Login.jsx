@@ -24,10 +24,17 @@ const Login = () => {
         "http://localhost:8080/user/login",
         information
       );
+      console.log(response.data); // Log the response data for debugging
       localStorage.setItem("token", response.data.token);
+
       navigate("/");
     } catch (err) {
-      setError("Login failed. Please check your credentials.");
+      setError(
+        err.response
+          ? err.response.data.message
+          : "Login failed. Please check your credentials."
+      );
+
       console.log(err);
     }
   };

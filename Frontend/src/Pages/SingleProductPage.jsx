@@ -12,13 +12,20 @@ function SinglePageProduct() {
 
   useEffect(() => {
     const getProductSingleDetail = async () => {
-      const response = await axios.get(
-        `http://localhost:8080/product/get-single/${id}`
-      );
+      const token = localStorage.getItem("token");
+      if (!token) {
+        return alert("Token missing");
+      }
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/product/get-single/${id}?token=${token}`
+        );
 
-      setProduct(response.data.data);
+        setProduct(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
-
     getProductSingleDetail();
   }, [id]);
 

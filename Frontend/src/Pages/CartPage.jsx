@@ -8,19 +8,23 @@ const CartPage = () => {
 
   useEffect(() => {
     const getCartData = async () => {
-      const token = localStorage.getItem("token"); 
+      const token = localStorage.getItem("token");
       console.log("Token retrieved:", token);
-
 
       if (!token) {
         return alert("Token is missing");
       }
 
-      const response = await axios.get(
-        `http://localhost:8080/cart/get-cart-data?token=${token}`
-      );
-      console.log(response);
-      setUsersCartData(response.data.cartData);
+      try {
+        const response = await axios.post(
+          `http://localhost:8080/cart/get-user-cart-data?token=${token}`
+        );
+        console.log(response);
+        setUsersCartData(response.data.cartData);
+      } catch (error) {
+        console.error("Error fetching cart data:", error);
+        alert("Failed to fetch cart data. Please check your authentication.");
+      }
     };
 
     getCartData();

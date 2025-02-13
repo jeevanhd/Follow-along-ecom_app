@@ -79,7 +79,7 @@ const updateProductController = async (req, res) => {
     quantity,
     category,
   } = req.body;
-  const { id } = req.params;
+  const { id } = req.query;
 
   try {
     const checkIfProductExist = await ProductModel.findOne({ _id: id });
@@ -132,7 +132,7 @@ const updateProductController = async (req, res) => {
 };
 
 const getSingleProductDocumentController = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.query;
   try {
     const data = await ProductModel.findOne({ _id: id });
 
@@ -149,7 +149,7 @@ const getSingleProductDocumentController = async (req, res) => {
 };
 
 const deleteSingleProductController = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.query;
 
   try {
     const data = await ProductModel.findOne({ _id: id });

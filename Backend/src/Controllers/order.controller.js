@@ -1,10 +1,10 @@
-const mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 const UserModel = require("../Model/user.model.js");
 const OrderModel = require("../Model/order.model.js");
 const CartModel = require("../Model/cart.model.js");
 
 const createOrderController = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.UserId;
   const { Items, address, totalAmount } = req.body;
 
   try {
@@ -54,7 +54,7 @@ const createOrderController = async (req, res) => {
 };
 
 const getUserOrderController = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.UserId;
   try {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res
@@ -88,7 +88,7 @@ const getUserOrderController = async (req, res) => {
 };
 
 const cancelOrderController = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.UserId;
   const orderId = req.query.orderId;
 
   try {

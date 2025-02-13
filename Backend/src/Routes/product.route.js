@@ -13,7 +13,7 @@ const {
 } = require("../Controllers/product.controller.js");
 
 router.get("/get-products", getProductDataController);
-router.get("/get-single/:id", getSingleProductDocumentController);
+router.get("/get-single/", getSingleProductDocumentController);
 
 router.post(
   "/create-product",
@@ -22,11 +22,11 @@ router.post(
 );
 
 router.put(
-  "/update-product/:id",
+  "/update-product",
   upload.array("files", 5),
   updateProductController
 );
 
-router.delete("/:id", deleteSingleProductController);
+router.delete("/", deleteSingleProductController);
 
 module.exports = router;

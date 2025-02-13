@@ -71,7 +71,7 @@ const verifyUser = (token) => {
 };
 
 const verifyUserController = async (req, res) => {
-  const { token } = req.params;
+  const { token } = req.query;
   try {
     if (verifyUser(token)) {
       return res
@@ -163,7 +163,7 @@ const login = async (req, res) => {
 };
 
 const getUserData = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.UserId;
   try {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(401).send({ message: "Invalid user id" });
@@ -183,7 +183,7 @@ const getUserData = async (req, res) => {
 };
 
 const AddAddressController = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.UserId;
   const { city, country, address1, address2, zipCode, addressType } = req.body;
   try {
     const userFindOne = await UserModel.findOne({ _id: userId });
@@ -215,7 +215,7 @@ const AddAddressController = async (req, res) => {
 };
 
 const GetAddressController = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.UserId;
   try {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(401).send({ message: "Please login, un-Authorized" });
@@ -235,8 +235,8 @@ const GetAddressController = async (req, res) => {
 };
 
 const DeleteAddController = async (req, res) => {
-  const userId = req.userId;
-  const { id } = req.params;
+  const userId = req.UserId;
+  const { id } = req.query;
   try {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(401).send({

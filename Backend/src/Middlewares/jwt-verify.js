@@ -15,11 +15,17 @@ const verifyUser = (req, res, next) => {
     });
   }
 
-  const data = jwt.verify(token, process.env.SECRET_KEY);
-  req.userEmailAddress = data.email;
-  req.UserId = data.id;
+  try {
+    const data = jwt.verify(token, process.env.SECRET_KEY);
+    req.userEmailAddress = data.email;
+    req.UserId = data.id;
 
-  next();
+    next();
+  } catch (error) {
+    return res.status(401).send({
+      message: "Unauthorized: Invalid token",
+    });
+  }
 };
 
 module.exports = verifyUser;

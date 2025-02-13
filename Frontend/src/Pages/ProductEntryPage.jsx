@@ -14,12 +14,12 @@ function ProductEntryPage() {
   const [errorInput, setInputError] = useState("");
   const [images, setImages] = useState([]);
 
-  const handelImageUpload = (e) => {
+  const handleImageUpload = (e) => {
     const imageArray = Array.from(e.target.files);
     setImages(imageArray);
   };
 
-  const HandelChange = (e) => {
+  const handleChange = (e) => {
     setInputError("");
     const { name, value } = e.target;
     setFormData({
@@ -28,7 +28,7 @@ function ProductEntryPage() {
     });
   };
 
-  const HandelSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const {
       title,
@@ -66,9 +66,11 @@ function ProductEntryPage() {
     });
 
     const token = localStorage.getItem("token");
-    let requestData = axios
+    let requestData = await axios
+
       .post(
-        `http://localhost:8080/product/create-product?=${token}`,
+        `http://localhost:8080/product/create-product?token=${token}`,
+
         formDataBody,
         {
           headers: {
@@ -80,8 +82,9 @@ function ProductEntryPage() {
         console.log(res.data);
         return res;
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.error("Error creating product:", error);
+
         return err;
       });
 
@@ -99,7 +102,7 @@ function ProductEntryPage() {
   return (
     <div className="flex justify-center items-center  bg-gray-100">
       <form
-        onSubmit={HandelSubmit}
+        onSubmit={handleSubmit}
         className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg"
       >
         <div className="mb-4">
@@ -108,7 +111,7 @@ function ProductEntryPage() {
           </label>
           <input
             type="text"
-            onChange={HandelChange}
+            onChange={handleChange}
             value={formData.title}
             name="title"
             placeholder="Enter product title"
@@ -124,7 +127,7 @@ function ProductEntryPage() {
             type="text"
             name="description"
             value={formData.description}
-            onChange={HandelChange}
+            onChange={handleChange}
             placeholder="Enter product description"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -138,7 +141,7 @@ function ProductEntryPage() {
             type="number"
             name="discountedPrice"
             value={formData.discountedPrice}
-            onChange={HandelChange}
+            onChange={handleChange}
             placeholder="Discounted price"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -152,7 +155,7 @@ function ProductEntryPage() {
             type="number"
             name="originalPrice"
             value={formData.originalPrice}
-            onChange={HandelChange}
+            onChange={handleChange}
             placeholder="Original price"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -166,7 +169,7 @@ function ProductEntryPage() {
             type="number"
             name="quantity"
             value={formData.quantity}
-            onChange={HandelChange}
+            onChange={handleChange}
             placeholder="Enter Stock quantity"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -179,7 +182,7 @@ function ProductEntryPage() {
           <input
             type="file"
             multiple
-            onChange={handelImageUpload}
+            onChange={handleImageUpload}
             className="block w-full text-sm text-gray-500"
           />
         </div>
@@ -190,7 +193,7 @@ function ProductEntryPage() {
           </label>
           <input
             type="text"
-            onChange={HandelChange}
+            onChange={handleChange}
             name="category"
             value={formData.category}
             placeholder="Enter Category"
@@ -206,7 +209,7 @@ function ProductEntryPage() {
             type="number"
             name="rating"
             value={formData.rating}
-            onChange={HandelChange}
+            onChange={handleChange}
             placeholder="Enter Rating of product"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />

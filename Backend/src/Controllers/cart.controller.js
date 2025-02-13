@@ -4,7 +4,7 @@ const CartModel = require("../Model/cart.model");
 
 const addToCartController = async (req, res) => {
   const { productId, quantity } = req.body;
-  const userId = req.userId;
+  const userId = req.UserId;
 
   try {
     if (!mongoose.Types.ObjectId.isValid(productId)) {
@@ -47,7 +47,7 @@ const addToCartController = async (req, res) => {
 };
 
 const getCartProductController = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.UserId;
 
   try {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -70,4 +70,23 @@ const getCartProductController = async (req, res) => {
   }
 };
 
-module.exports = { addToCartController, getCartProductController };
+const deleteCartProductController = async (req, res) => {
+  const id = req.query.id;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(401).send({ message: "inValid product id" });
+    }
+
+    const data = await CartModel.findByIdAndDelete({ _id: id });
+
+    return res.status(202).send({ message: "Deleted successfully", data });
+  } catch (error) {
+    return res.status(500).send({ message: error.message, success: false });
+  }
+};
+
+module.exports = {
+  addToCartController,
+  getCartProductController,
+  deleteCartProductController,
+};
