@@ -575,3 +575,11 @@
 - Implemented the logic to fetch user orders from the order schema
 - Implemented the logic to add new order in the order schema
 - Implemented the logic to update the order schema after adding a new order
+
+## Project Milestone 29
+
+### Implemented Payment gateway using razorpay
+
+- Implemented the logic to integrate razorpay payment gateway
+- Implemented the logic to handle payment success and failure scenarios
+- Implemented the logic to update the order schema after successful payment
