@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartCard from "../Components/ProductCard/CartCard";
+import handelPay from "../Utils/RazorPay";
 
 const OrderConfirmation = () => {
   const [cartData, setCartData] = useState([]);
@@ -59,6 +60,11 @@ const OrderConfirmation = () => {
     }
 
     navigate("/order-history");
+    handelPay(total, token, cartData)
+      .then((res) => {
+        navigate("/order-history");
+      })
+      .catch((err) => console.log(err.message));
 
     console.log(response.data);
   };
@@ -113,7 +119,7 @@ const OrderConfirmation = () => {
             className="px-5 py-2 rounded-lg bg-blue-500 text-white hover:bg-green-500"
             onClick={OrderConfirmation}
           >
-            Confirm order
+            Confirm order {total}
           </button>
         </div>
       </div>
