@@ -6,7 +6,7 @@ const userRouter = require("./Routes/user.route.js");
 const productRouter = require("./Routes/product.route.js");
 const cartRouter = require("./Routes/cart.router.js");
 const orderRouter = require("./Routes/order.route.js");
-const paymentRouter = require("./Routes/payment.route.js");
+const paymentRouter = require("./Routes/payment.router.js");
 
 if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({
