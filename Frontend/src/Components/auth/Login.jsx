@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { setUserEmail } from "../../Redux/User/UserAction";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [information, setInformation] = useState({
     email: "",
     password: "",
@@ -16,6 +19,8 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  dispatch(setUserEmail(information.email));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
