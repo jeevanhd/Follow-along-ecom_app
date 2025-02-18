@@ -5,6 +5,7 @@ import CartCard from "../Components/ProductCard/CartCard";
 
 const CartPage = () => {
   const [UsersCartData, setUsersCartData] = useState([]);
+  const data = useSelector((state) => state.user);
 
   useEffect(() => {
     const getCartData = async () => {

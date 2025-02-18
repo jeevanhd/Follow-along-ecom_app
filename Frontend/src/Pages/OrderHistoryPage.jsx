@@ -4,6 +4,7 @@ import CartCard from "../Components/ProductCard/CartCard";
 
 const OrderHistoryPage = () => {
   const [orderData, setOrderData] = useState([]);
+  const data = useSelector((state) => state.user);
 
   const fetchOrderProducts = async () => {
     const token = localStorage.getItem("token");

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Card = ({ children, className = "" }) => {
   <div className={`bg-white rounded-lg shadow-lg p-6 ${className}`}>
@@ -37,6 +38,7 @@ const ProfileCard = () => {
 
     setUserData(response.data.data);
   };
+  const data = useSelector((state) => state.user);
 
   useEffect(() => {
     getUserData();
