@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Card from "../Components/ProductCard/Card.jsx";
 
 function HomePage() {
