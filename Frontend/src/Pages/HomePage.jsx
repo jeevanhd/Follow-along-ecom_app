@@ -4,6 +4,7 @@ import Card from "../Components/ProductCard/Card.jsx";
 
 function HomePage() {
   const [data, setData] = useState();
+  const dataRedux = useSelector((state) => state.user);
 
   const fetchProducts = async () => {
     try {

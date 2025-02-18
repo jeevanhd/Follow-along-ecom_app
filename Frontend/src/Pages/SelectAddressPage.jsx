@@ -4,6 +4,7 @@ import AddressList from "../Components/Profile/AddressList";
 
 const SelectAddressPage = () => {
   const [allAddresses, setAllAddress] = useState([]);
+  const data = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchAddresses = async () => {
