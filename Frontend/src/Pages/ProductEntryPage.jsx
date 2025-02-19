@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function ProductEntryPage() {
   const [formData, setFormData] = useState({
@@ -85,8 +86,6 @@ function ProductEntryPage() {
       })
       .catch((error) => {
         console.error("Error creating product:", error);
-
-        return err;
       });
 
     for (let pair of formDataBody.entries()) {

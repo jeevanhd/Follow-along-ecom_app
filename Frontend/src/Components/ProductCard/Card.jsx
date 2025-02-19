@@ -29,7 +29,8 @@ function Card({
     <div className="w-80 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       {/* Image Container */}
       <div className="relative">
-        <Link to={`/product-details/${id}`}>
+        <Link to={`/product-details?id=${id}`}>
+
           <img
             src={image}
             className="w-full h-48 object-cover"

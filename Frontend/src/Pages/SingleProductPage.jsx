@@ -1,11 +1,14 @@
 import axios from "axios";
 import { HeartIcon, ShoppingBagIcon, Star } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+
 import ImageModal from "../Components/imageModals/imageModal";
 
-function SinglePageProduct() {
-  const { id } = useParams();
+const SinglePageProduct = () => {
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
   const [product, setProduct] = useState({});
   const [showImageModal, setShowImageModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -18,7 +21,7 @@ function SinglePageProduct() {
       }
       try {
         const response = await axios.get(
-          `http://localhost:8080/product/get-single/${id}?token=${token}`
+          `http://localhost:8080/product/get-single?id=${id}&token=${token}`
         );
 
         setProduct(response.data.data);
@@ -115,6 +118,6 @@ function SinglePageProduct() {
       )}
     </div>
   );
-}
+};
 
 export default SinglePageProduct;

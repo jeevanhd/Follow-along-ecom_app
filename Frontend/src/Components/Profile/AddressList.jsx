@@ -12,7 +12,7 @@ const AddressList = ({ addresses }) => {
     );
   }
 
-  const handelClick = (index) => {
+  const handleClick = (index) => {
     const singleAddress = addresses[index];
     localStorage.setItem("address", JSON.stringify(singleAddress));
     navigate("/order-confirmation");
@@ -20,7 +20,7 @@ const AddressList = ({ addresses }) => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-      {addresses.map((address, index) => {
+      {addresses.map((address, index) => (
         <div
           key={index}
           style={{
@@ -29,8 +29,9 @@ const AddressList = ({ addresses }) => {
             padding: "16px",
             backgroundColor: "white",
             boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+            cursor: "pointer",
           }}
-          onClick={() => handelClick(index)}
+          onClick={() => handleClick(index)}
         >
           <div style={{ marginBottom: "8px" }}>
             <h3
@@ -55,8 +56,8 @@ const AddressList = ({ addresses }) => {
               <p>{address.country}</p>
             </div>
           </div>
-        </div>;
-      })}
+        </div>
+      ))}
     </div>
   );
 };

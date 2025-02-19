@@ -12,8 +12,10 @@ export default function CartCard({
   id,
   createdBy,
   orderStatus,
-  handelCancelOrder,
+  handleCancelOrder,
 }) {
+  const fallbackImage = "https://via.placeholder.com/150";
+
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-lg shadow p-4">
       {orderStatus && (
@@ -26,7 +28,13 @@ export default function CartCard({
         <div className="relative w-64">
           <Link to={`/product-details/${id}`}>
             <img
-              src={typeof images == "string" ? images : images[0]}
+              src={
+                typeof images === "string"
+                  ? images
+                  : images && images.length > 0
+                  ? images[0]
+                  : fallbackImage
+              }
               alt="Product Image"
               className="rounded-lg object-cover"
             />
@@ -42,7 +50,7 @@ export default function CartCard({
             </div>
             <button
               className="text-gray-500 hover:text-gray-700"
-              onClick={orderStatus ? () => handelCancelOrder(id) : () => {}}
+              onClick={() => handleCancelOrder(id)}
             >
               <X className="w-6 h-6" />
             </button>

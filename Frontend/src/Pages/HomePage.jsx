@@ -27,7 +27,7 @@ function HomePage() {
   }, []);
 
   const handelDelete = async (id) => {
-    const data = await axios.delete(`http://localhost:8080/product/${id}`);
+    const data = await axios.delete(`http://localhost:8080/product/?id=${id}`);
     setData(data.data.data);
   };
 
@@ -38,7 +38,11 @@ function HomePage() {
       <div className="grid grid-cols-3">
         {data?.map((ele, index) => {
           return (
-            <div style={{ margin: "auto" }} className="border border-white">
+            <div
+              key={ele._id}
+              style={{ margin: "auto" }}
+              className="border border-white"
+            >
               <Card
                 title={ele.title}
                 image={ele.images[0] ? ele.images[0] : "Product Image Missing"}
