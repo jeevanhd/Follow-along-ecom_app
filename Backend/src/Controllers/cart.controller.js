@@ -32,7 +32,7 @@ const addToCartController = async (req, res) => {
         .send({ message: "Already present in cart", success: false });
     }
 
-    await CartModel.create({
+    const data = await CartModel.create({
       productId,
       quantity,
       userId,
@@ -40,7 +40,11 @@ const addToCartController = async (req, res) => {
 
     return res
       .status(201)
-      .send({ message: "Product created successfully", success: true });
+      .send({
+        message: "Product created successfully",
+        success: true,
+        data: data,
+      });
   } catch (error) {
     res.status(500).send({ message: error.message, success: false });
   }
@@ -71,13 +75,24 @@ const getCartProductController = async (req, res) => {
 };
 
 const deleteCartProductController = async (req, res) => {
-  const id = req.query.id;
+  const productId = req.query.id;
+  const userId = req.UserId;
   try {
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(401).send({ message: "inValid product id" });
+    if (
+      !mongoose.Types.ObjectId.isValid(productId) ||
+      !mongoose.Types.ObjectId.isValid(userId)
+    ) {
+      return res.status(401).send({ message: "Invalid product or user id" });
     }
 
-    const data = await CartModel.findByIdAndDelete({ _id: id });
+    const data = await CartModel.findOneAndDelete({
+      productId: productId,
+      userId: userId,
+    });
+
+    if (!data) {
+      return res.status(404).send({ message: "Product not found in cart" });
+    }
 
     return res.status(202).send({ message: "Deleted successfully", data });
   } catch (error) {

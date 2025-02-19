@@ -29,7 +29,6 @@ const Login = () => {
         "http://localhost:8080/user/login",
         information
       );
-      console.log(response.data); // Log the response data for debugging
       localStorage.setItem("token", response.data.token);
 
       navigate("/");

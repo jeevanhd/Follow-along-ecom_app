@@ -1,11 +1,28 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import CartCard from "../Components/ProductCard/CartCard";
 
 const CartPage = () => {
   const [UsersCartData, setUsersCartData] = useState([]);
+
+  const handleCancelOrder = async (productId) => {
+    const token = localStorage.getItem("token");
+    try {
+      await axios.delete(
+        `http://localhost:8080/cart/delete-from-cart?token=${token}&id=${productId}`
+      );
+      // Update local state by removing the deleted item
+      setUsersCartData(prev => prev.filter(item => item.productId._id !== productId));
+    } catch (error) {
+      console.error("Error deleting cart item:", error);
+      alert("Failed to delete item from cart. Please try again.");
+    }
+  };
+
   const data = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCartData = async () => {
@@ -17,14 +34,20 @@ const CartPage = () => {
       }
 
       try {
-        const response = await axios.post(
+        const response = await axios.get(
           `http://localhost:8080/cart/get-user-cart-data?token=${token}`
         );
-        console.log(response);
         setUsersCartData(response.data.cartData);
       } catch (error) {
-        console.error("Error fetching cart data:", error);
-        alert("Failed to fetch cart data. Please check your authentication.");
+        console.error("Error fetching cart data:", error.response);
+        if (error.response.status === 401) {
+          alert("UnAuthorized Access... redirecting to login ");
+          navigate("/login");
+        } else {
+          alert(
+            "Failed to fetch cart data. Please check your authentication. or login again"
+          );
+        }
       }
     };
 
@@ -44,14 +67,14 @@ const CartPage = () => {
             return (
               <div key={index}>
                 <CartCard
-                  title={data.productId.title}
-                  images={data.productId.images[0]}
-                  //   Index={index}
-                  description={data.productId.description}
-                  originalPrice={data.productId.originalPrice}
-                  discountedPrice={data.productId.discountedPrice}
-                  id={data.productId._id}
+                  title={data.productId?.title}
+                  images={data.productId?.images[0]}
+                  description={data.productId?.description}
+                  originalPrice={data.productId?.originalPrice}
+                  discountedPrice={data.productId?.discountedPrice}
+                  id={data.productId?._id}
                   createdBy={"jeev@hd.com"}
+                  handleCancelOrder={handleCancelOrder}
                 />
               </div>
             );

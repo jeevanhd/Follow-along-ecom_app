@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-const upload = multer({ dest: "temp-uploads/" });
+const upload = require("../Middlewares/multer.js");
 const verifyUser = require("../Middlewares/jwt-verify.js");
 
 const {
@@ -17,15 +16,11 @@ router.get("/get-single/", getSingleProductDocumentController);
 
 router.post(
   "/create-product",
-  [upload.array("files", 3), verifyUser],
+  [upload.array("files"), verifyUser],
   createProductController
 );
 
-router.put(
-  "/update-product",
-  upload.array("files", 5),
-  updateProductController
-);
+router.put("/update-product", upload.array("files"), updateProductController);
 
 router.delete("/", deleteSingleProductController);
 

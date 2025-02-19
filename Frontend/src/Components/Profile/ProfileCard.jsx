@@ -3,23 +3,27 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Card = ({ children, className = "" }) => {
-  <div className={`bg-white rounded-lg shadow-lg p-6 ${className}`}>
-    {children}
-  </div>;
+  return (
+    <div className={`bg-white rounded-lg shadow-lg p-6 ${className}`}>
+      {children}
+    </div>
+  );
 };
 
 const IconWrapper = ({ children }) => {
-  <div className="bg-gray-100 p-2 rounded-full">{children}</div>;
+  return <div className="bg-gray-100 p-2 rounded-full">{children}</div>;
 };
 
 const InfoSection = ({ icon, label, value }) => {
-  <div>
-    <IconWrapper>{icon}</IconWrapper>
+  return (
     <div>
-      <p className="text-sm text-gray-500">{label}</p>
-      <p className="text-gray-900">{value}</p>
+      <IconWrapper>{icon}</IconWrapper>
+      <div>
+        <div className="text-sm text-gray-500">{label}</div>
+        <div className="text-gray-900">{value}</div>
+      </div>
     </div>
-  </div>;
+  );
 };
 
 const ProfileCard = () => {
@@ -143,21 +147,26 @@ const ProfileCard = () => {
             label="Addresses"
             value={
               userData?.address?.length > 0 ? (
-                <ul className="list-disc list-inside">
-                  {userData.address.map((SingleAdd, index) => (
-                    <>
-                      <button onClick={() => handelDelete(SingleAdd._id)}>
-                        Delete 👇🏻
-                      </button>
-                      <li key={index}>City: {SingleAdd.city}</li>
-                      <li key={index}>Country: {SingleAdd.country}</li>
-                      <li key={index}>Address 1: {SingleAdd.address1}</li>
-                      <li key={index}>Address 2: {SingleAdd.address2}</li>
-                      <li key={index}>Pin Code: {SingleAdd.zipCode}</li>
-                      <br />
-                    </>
-                  ))}
-                </ul>
+                <div>
+                  <ul className="list-disc list-inside">
+                    {userData.address.map((SingleAdd) => (
+                      <li key={SingleAdd._id}>
+                        <button
+                          onClick={() => handelDelete(SingleAdd._id)}
+                          className="mb-2"
+                        >
+                          Delete 👇🏻
+                        </button>
+                        <div>City: {SingleAdd.city}</div>
+                        <div>Country: {SingleAdd.country}</div>
+                        <div>Address 1: {SingleAdd.address1}</div>
+                        <div>Address 2: {SingleAdd.address2}</div>
+                        <div>Pin Code: {SingleAdd.zipCode}</div>
+                        <br />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ) : (
                 <span className="text-gray-400 italic">
                   No addresses Founded
