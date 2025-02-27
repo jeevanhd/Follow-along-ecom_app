@@ -27,15 +27,14 @@ const createOrderController = async (req, res) => {
         .json({ message: "Items are required", success: false });
     }
 
-    const order = Items.map(async (ele) => {
-      return await OrderModel.create({
-        user: userId,
-        orderItems: ele.productId._id,
-        shippingAddress: address,
-        totalAmount: totalAmount,
-      });
+    const orderItems = Items.map((ele) => ele.productId._id);
+
+    const order = await OrderModel.create({
+      user: userId,
+      OrderItems: orderItems,
+      shippingAddress: address,
+      totalAmount: totalAmount,
     });
-    await Promise.all(order);
 
     const ItemsMapped = Items.map(async (ele) => {
       return await CartModel.findByIdAndDelete({ _id: ele._id });
@@ -44,8 +43,9 @@ const createOrderController = async (req, res) => {
     const checkDeletedItems = await Promise.all(ItemsMapped);
 
     return res.status(201).send({
-      message: "Data successfully Fetched",
+      message: "Order created successfully",
       success: true,
+      order,
       checkDeletedItems,
     });
   } catch (error) {
@@ -75,7 +75,7 @@ const getUserOrderController = async (req, res) => {
         orderStatus: { $ne: "Cancelled" },
       },
       { orderStatus: 1, orderItems: 1 }
-    ).populate("orderItems");
+    ).populate("OrderItems");
 
     return res.status(200).send({
       message: "Data Fetched successfully",

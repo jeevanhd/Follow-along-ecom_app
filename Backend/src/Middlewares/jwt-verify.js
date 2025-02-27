@@ -24,6 +24,7 @@ const verifyUser = (req, res, next) => {
   } catch (error) {
     return res.status(401).send({
       message: "Unauthorized: Invalid token",
+      error: error,
     });
   }
 };

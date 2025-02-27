@@ -8,11 +8,13 @@ const OrderSchema = new mongoose.Schema(
       required: true,
     },
 
-    OrderItems: {
-      type: mongoose.Types.ObjectId,
-      ref: "Product",
-      required: true,
-    },
+    OrderItems: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Product",
+        required: true,
+      },
+    ],
 
     shippingAddress: {
       country: { type: String, required: true },
