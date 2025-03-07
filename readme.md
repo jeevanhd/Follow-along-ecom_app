@@ -583,3 +583,39 @@
 - Implemented the logic to integrate razorpay payment gateway
 - Implemented the logic to handle payment success and failure scenarios
 - Implemented the logic to update the order schema after successful payment
+
+## Project Milestone 30
+
+### Implemented Advanced Search and Filter Functionality for Products
+
+- Developed a backend endpoint to support advanced product search queries.
+- Integrated a dynamic frontend search bar with filter options for categories, price range, and ratings.
+- Updated the product schema to efficiently handle filtering criteria.
+- Optimized database queries to improve search performance.
+
+## Project Milestone 31
+
+### Enhanced User Profile Management
+
+- Added endpoints to update user profiles, including updating profile pictures and managing multiple addresses.
+- Improved authentication middleware to secure profile-related endpoints.
+- Enhanced frontend components for a smoother profile editing experience.
+- Integrated form validation to ensure data integrity during profile updates.
+
+## Project Milestone 32
+
+### Integrated Product Reviews and Ratings System
+
+- Created backend endpoints for submitting and retrieving product reviews.
+- Implemented logic to calculate and update average product ratings.
+- Updated the frontend to display user reviews and ratings alongside product details.
+- Enabled users to submit reviews, enhancing overall engagement and feedback collection.
+
+## Project Milestone 33
+
+### Performance Optimizations and Bug Fixes
+
+- Optimized critical database queries and implemented indexing strategies to enhance response times.
+- Refactored portions of the codebase to improve maintainability and reduce redundancy.
+- Fixed several bugs related to order processing and payment integration.
+- Improved error handling and logging mechanisms for better monitoring and debugging.
